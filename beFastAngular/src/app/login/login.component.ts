@@ -10,8 +10,8 @@ import { BasicAutenticacaoService } from '../service/basic.autenticacao.service.
 })
 export class LoginComponent implements OnInit {
 
-  username = 'andre'
-  password = '1234'
+  username = ''
+  password = ''
   errorMessage = 'Invalid Credentials'
   invalidLogin = false
 
@@ -25,9 +25,7 @@ export class LoginComponent implements OnInit {
   ngOnInit() {
   }
 
-  handleLogin() {
-    // console.log(this.username);
-    //if(this.username==="in28minutes" && this.password === 'dummy') {
+  handleLogin() {  
     if(this.hardcodedAuthenticationService.authenticate(this.username, this.password)) {
       //Redirect to Welcome Page
       this.router.navigate(['welcome', this.username])
@@ -38,8 +36,6 @@ export class LoginComponent implements OnInit {
   }
 
   handleBasicAuthLogin() {
-    // console.log(this.username);
-    //if(this.username==="in28minutes" && this.password === 'dummy') {
     this.basicAuthenticationService.executeAuthenticationService(this.username, this.password)
         .subscribe(
           data => {

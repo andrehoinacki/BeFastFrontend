@@ -12,6 +12,7 @@ export class TodoComponent implements OnInit {
 
   id:number
   todo: Todo
+  username:string
 
   constructor(
     private todoService: TodoDataService,
@@ -24,9 +25,12 @@ export class TodoComponent implements OnInit {
     this.id = this.route.snapshot.params['id'];
     
     this.todo = new Todo(this.id,'',false,new Date());
-    
+
+    // this.username = JSON.parse(localStorage.getItem('usuario'));
+        
     if(this.id!=-1) {
-      this.todoService.retrieveTodo('in28minutes', this.id)
+      let username = sessionStorage.getItem('authenticaterUser')
+      this.todoService.retrieveTodo(username, this.id)
           .subscribe (
             data => this.todo = data
           )
@@ -34,8 +38,9 @@ export class TodoComponent implements OnInit {
   }
 
   saveTodo() {
+    let username = sessionStorage.getItem('authenticaterUser')
     if(this.id == -1) { //=== ==
-      this.todoService.createTodo('in28minutes', this.todo)
+      this.todoService.createTodo(username, this.todo)
           .subscribe (
             data => {
               console.log(data)
@@ -43,7 +48,7 @@ export class TodoComponent implements OnInit {
             }
           )
     } else {
-      this.todoService.updateTodo('in28minutes', this.id, this.todo)
+      this.todoService.updateTodo(username, this.id, this.todo)
           .subscribe (
             data => {
               console.log(data)
