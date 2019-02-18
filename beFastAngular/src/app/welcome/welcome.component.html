@@ -1,15 +1,11 @@
-<H1>Bem vindo</H1>
+<H4>Bem vindo, {{name}}.</H4>
 
-<div class="container">
-    {{name}}.
+<div >    
+    <p>O sistema BeFast tem como princípio equilibrar as vendas de sua empresa para
+        seja possível vendar mais, com segurança e qualidade.</p>
+    <img src="assets/MotivaçãoComFundo2.png" alt="BeFast">
 </div>
+<div>
+    
 
-<div class="container">
-    Clique Aqui para visualizar a mensagem
-    <button (click)=getWelcomeMessageWithParameter() class="btn btn-success">Mensagem</button>
-</div>
-
-<div class="container" *ngIf="welcomeMessageFromService">
-    <H2>Your Customized Welcome Message</H2>
-    {{welcomeMessageFromService}}
 </div>
