@@ -55,6 +55,7 @@ export class LoginComponent implements OnInit {
         .subscribe(
           data => {
             console.log(data)
+           // this.basicAuthenticationService.saveUserLogin(data.json());
             this.router.navigate(['welcome', this.username])
             this.invalidLogin = false      
           },

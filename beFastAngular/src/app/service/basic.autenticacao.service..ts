@@ -13,6 +13,14 @@ export class BasicAutenticacaoService {
 
   constructor(private http : HttpClient) { }
 
+  public getUserToken(){
+    return localStorage.getItem('token');
+  }
+
+  public getUserRole(){
+    return localStorage.getItem('role');
+  }
+
   executeJWTAuthenticationService(username, password) {
     
     return this.http.post<any>(
@@ -24,6 +32,7 @@ export class BasicAutenticacaoService {
           data => {
             sessionStorage.setItem(AUTHENTICATED_USER, username);
             sessionStorage.setItem(TOKEN, `Bearer ${data.token}`);
+            this.saveUserLogin(data);
             return data;
           }
         )
@@ -69,8 +78,21 @@ export class BasicAutenticacaoService {
   }
 
   logout(){
-    sessionStorage.removeItem(AUTHENTICATED_USER)
-    sessionStorage.removeItem(TOKEN)
+    localStorage.clear();
+    sessionStorage.clear();
+  }
+
+  public saveUserLogin(result : any){
+    localStorage.setItem('token', result.token);
+    localStorage.setItem('role', result.role);
+
+    /**
+     * Caso usuário seja um aluno
+     */
+    if(result.role.nome == 'ROLE_ALUNO'){
+      localStorage.setItem('aluno_saldo', result.saldo);
+    }
+    
   }
   
 }

@@ -5,6 +5,14 @@ import { Injectable } from '@angular/core';
 })
 export class AutenticacaoService {
 
+  public getUserToken(){
+    return localStorage.getItem('token');
+  }
+
+  public getUserRole(){
+    return localStorage.getItem('role');
+  }
+
   constructor() { }
 
   authenticate(username, password) {
@@ -23,6 +31,20 @@ export class AutenticacaoService {
   }
 
   logout(){
-    sessionStorage.removeItem('authenticaterUser')
+    localStorage.clear();
+    sessionStorage.clear();
+  }
+
+  public saveUserLogin(result : any){
+    localStorage.setItem('token', result.token.token);
+    localStorage.setItem('role', result.role.nome);
+
+    /**
+     * Caso usuário seja um aluno
+     */
+    if(result.role.nome == 'ROLE_ALUNO'){
+      localStorage.setItem('aluno_saldo', result.saldo);
+    }
+    
   }
 }

@@ -7,14 +7,42 @@ import { AutenticacaoService } from './autenticacao.service';
 })
 export class RouteGuardService implements CanActivate {
 
-  constructor(private autenticacaoService : AutenticacaoService, 
-    private router : Router) { }
+  constructor(
+    private autenticacaoService : AutenticacaoService, 
+    private router : Router
+  ) { }
 
   canActivate(route: ActivatedRouteSnapshot, state: RouterStateSnapshot) {
-    if (this.autenticacaoService.isUserLoggedIn()) {
+
+    const expectedRole = route.data.expectedRole;
+    
+    if(this.autenticacaoService.isUserLoggedIn()){
+      if(this.verifyRoles( expectedRole )){
+        return true;
+      } else {
+        this.router.navigate(['erro']);
+        return false;
+      }
+      
+    }else{
+        this.router.navigate(['login']);
+        return false;
+    }
+
+
+/*     if (this.autenticacaoService.isUserLoggedIn()) {
       return true;    
     }
     this.router.navigate(['login']);
-    return false;
+    return false; */
   }
+
+  verifyRoles( _expectedRole ){
+    if(_expectedRole != null){
+        return  _expectedRole.filter(role => role == this.autenticacaoService.getUserRole()).length > 0 ? true : false;
+    }else{
+        return true;
+    }
+}
+
 }

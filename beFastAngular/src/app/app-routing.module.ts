@@ -11,8 +11,22 @@ import { ErrorComponent } from './error/error.component';
 const routes: Routes = [
   {path:'', component:LoginComponent},
   {path:'login', component:LoginComponent},
-  {path:'welcome/:name', component:WelcomeComponent, canActivate : [RouteGuardService]},
-  { path: 'todos', component: ListTodosComponent, canActivate:[RouteGuardService] },
+  {path:'erro', component:ErrorComponent},
+  
+  {
+    path : 'welcome/:name',
+    data: { expectedRole: ['ROLE_ADMIN', 'ROLE_FUNCIONARIO', 'ROLE_RESPOSAVEL','ROLE_ALUNO']},
+    component : WelcomeComponent, 
+    canActivate : [RouteGuardService]
+  },
+
+  { 
+    path : 'todos',
+    data: { expectedRole: ['ROLE_ADMIN']}, 
+    component : ListTodosComponent, 
+    canActivate : [RouteGuardService] 
+  },
+
   {path:'logout', component:LogoutComponent, canActivate : [RouteGuardService]},
   { path: 'todos/:id', component: TodoComponent, canActivate:[RouteGuardService] },
   {path:'**', component:ErrorComponent}
