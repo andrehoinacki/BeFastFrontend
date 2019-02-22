@@ -2,6 +2,8 @@ import { TodoComponent } from './todo/todo.component';
 import { RouteGuardService } from './service/route-guard.service';
 import { LogoutComponent } from './logout/logout.component';
 import { ListTodosComponent } from './list-todos/list-todos.component';
+import { ListUsuarioComponent } from './admin/list-usuario/list-usuario.component';
+import { UsuarioComponent } from './admin/usuario/usuario.component';
 import { WelcomeComponent } from './welcome/welcome.component';
 import { NgModule } from '@angular/core';
 import { Routes, RouterModule } from '@angular/router';
@@ -24,6 +26,20 @@ const routes: Routes = [
     path : 'todos',
     data: { expectedRole: ['ROLE_ADMIN']}, 
     component : ListTodosComponent, 
+    canActivate : [RouteGuardService] 
+  },
+
+  { 
+    path : 'admin/usuario',
+    data: { expectedRole: ['ROLE_ADMIN', 'ROLE_FUNCIONARIO']}, 
+    component : ListUsuarioComponent, 
+    canActivate : [RouteGuardService] 
+  },
+
+  { 
+    path : 'admin/usuario/:id',
+    data: { expectedRole: ['ROLE_ADMIN', 'ROLE_FUNCIONARIO']}, 
+    component : UsuarioComponent, 
     canActivate : [RouteGuardService] 
   },
 

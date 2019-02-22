@@ -1,0 +1,21 @@
+<div class="row">
+    <div class="col-sm">
+        <p>&nbsp;</p>
+        <nav aria-label="Page navigation example">
+            <div *ngIf="numpages>1">
+                <ul class="pagination justify-content-center">
+                    <li class="page-item" [class.disabled]="!pag_can_go_first">
+                        <a class="page-link" href="javascript:void(0)" (click)="goFirstPage()"><span>&laquo;</span></a>
+                    </li>
+                    <li class="page-item" [ngClass]="{'active': page == actualPage}" *ngFor="let page of pages">
+                        <a class="page-link" href="javascript:void(0)" (click)="goPage(page)">{{page}}</a>
+                    </li>
+                    <li class="page-item" [class.disabled]="!pag_can_go_last">
+                        <a class="page-link" href="javascript:void(0)" (click)="goLastPage()"><span>&raquo;</span></a>
+                    </li>
+                </ul>
+        
+            </div>
+        </nav>
+    </div>
+</div>

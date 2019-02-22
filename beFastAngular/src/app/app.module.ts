@@ -13,7 +13,10 @@ import { LogoutComponent } from './logout/logout.component';
 import { HttpClientModule, HTTP_INTERCEPTORS } from '@angular/common/http';
 import { TodoComponent } from './todo/todo.component';
 import { ListTodosComponent } from './list-todos/list-todos.component';
+import { UsuarioComponent } from './admin/usuario/usuario.component';
+import { ListUsuarioComponent } from './admin/list-usuario/list-usuario.component';
 import { HttpIntercepterBasicAuthService } from './service/http/http-intercepter-basic-auth.service';
+import { PaginatorComponent } from './util/paginator/paginator.component';
 
 @NgModule({
   declarations: [
@@ -25,7 +28,10 @@ import { HttpIntercepterBasicAuthService } from './service/http/http-intercepter
     FooterComponent,
     LogoutComponent,
     TodoComponent,
-    ListTodosComponent
+    ListTodosComponent,
+    UsuarioComponent,
+    ListUsuarioComponent,
+    PaginatorComponent
   ],
   imports: [
     BrowserModule,
