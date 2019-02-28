@@ -30,7 +30,7 @@ salvar(data : Usuario) : Observable <any> {
           )
       );
   }else{
-      return this.http.put(`${API_URL}/admin/usuario/edit`+data.id,data).pipe(
+      return this.http.put(`${API_URL}/admin/usuario/edit`,data).pipe(
           map(
               data => data
           )
@@ -39,41 +39,18 @@ salvar(data : Usuario) : Observable <any> {
 }
 
 get(id) : Observable <any> {
-  return this.http.get("/admin/usuario/"+id).pipe(
+  return this.http.get(`${API_URL}/admin/usuario/${id}`).pipe(
       map(
           data => data
       )
   );
 }
 
-/*   list(filter : any) {
-    console.log();
-    return this.http.get("/admin/usuario/list",filter);
-  } */
-
-  retrieveAllTodos(username) {
-    return this.http.get<Usuario[]>(`${TODO_JPA_API_URL}/users/${username}/usuario`);
-    //console.log("Execute Hello World Bean Service")
-  }
-
-  deleteUsuario(username, id){
-    return this.http.delete(`${TODO_JPA_API_URL}/users/${username}/usuario/${id}`);
+  deleteUsuario(id){
+    return this.http.delete(`${API_URL}/admin/usuario/${id}`);
   }
 
   retrieveUsuario(username, id){
     return this.http.get<Usuario>(`${TODO_JPA_API_URL}/users/${username}/usuario/${id}`);
   }
-
-  updateUsuario(username, id, todo){
-    return this.http.put(
-          `${TODO_JPA_API_URL}/users/${username}/usuario/${id}`
-                , todo);
-  }
-
-  createUsuario(username, usuario){
-    return this.http.post(
-              `${TODO_JPA_API_URL}/users/${username}/todos`
-                , usuario);
-  }
-
 }

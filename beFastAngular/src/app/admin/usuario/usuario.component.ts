@@ -58,15 +58,12 @@ export class UsuarioComponent implements OnInit {
     this.usuarioService.get(this.id).subscribe(data=>{
       this.usuario = data;
       this.selectedRole = data.role;
+      this.selectedRoleNome = data.role.nome;
     });
 
   }
   
   saveUsuario() {
-/*     let username = sessionStorage.getItem('authenticaterUser')
-    this.roleService.getRoleByNome(this.selectedRole).subscribe(data=>{
-      this.usuario.role = data;
-    }); */
     this.usuario.role = this.selectedRole;
     this.usuarioService.salvar(this.usuario).subscribe(data=>{
       //this.messageService.openSuccessMessage(translate['FORM_SUCCESS']);

@@ -38,24 +38,12 @@ export class ListUsuarioComponent implements OnInit {
     this.load();
   }
 
-  refreshUsuario(){
-    let username = sessionStorage.getItem('authenticaterUser')
-    this.usuarioService.retrieveAllTodos(username).subscribe(
-      response => {
-        console.log(response);
-        this.usuarios = response;
-      }
-    )
-  }
-
   deleteUsuario(id) {
     let username = sessionStorage.getItem('authenticaterUser')
-    console.log(`delete todo ${id}` )
-    this.usuarioService.deleteUsuario(username, id).subscribe (
+    this.usuarioService.deleteUsuario(id).subscribe (
       response => {
-        console.log(response);
-        this.message = `Delete of Todo ${id} Successful!`;
-        this.refreshUsuario();
+        this.message = `Usuário deletado com sucesso`;
+        this.load();
       }
     )
   }

@@ -25,7 +25,7 @@
     <fieldset class="form-group">
         <label>Role</label>
         <div class="list-group-item"  *ngFor="let item of listRole">
-            <input type="radio" [(ngModel)]="roleSelectedNome" name="list_name" value ="{{item.nome}}" (change)="onItemChange(item)"/> 
+            <input type="radio" [(ngModel)]="selectedRoleNome" name="list_name" value ="{{item.nome}}" (change)="onItemChange(item)"/> 
             {{item.nome}}
 
         </div>
