@@ -32,8 +32,8 @@
     <fieldset class="form-group">
       <label>Restricões</label>
       <div *ngFor="let r of listRestricao">
-          <input type="checkbox" ng-checked="verifychecked(r)" (change)="onItemChangeRestricao(r)"/> 
-          {{r.nome}}
+          <input type="checkbox" checked ="{{r.checked}}" name=restricoes value={{r}} (change)="onItemChangeRestricao(r)"/> 
+          {{r.id}} - {{r.nome}}
       </div>
     </fieldset>
 

@@ -14,8 +14,8 @@ export class ListProdutoComponent implements OnInit {
 
   produtos: Produto[]
 
-  message: string
-  descricao: string
+  message: string;
+  descricao: string;
   totalRecords: number;
   actualPage : number = 1;
   pageSize : number = 10;

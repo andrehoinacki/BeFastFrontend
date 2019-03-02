@@ -15,6 +15,7 @@ import { Categoria } from '../categoria/categoria.model';
 })
 export class ProdutoComponent implements OnInit {
 
+  message: string;
   id:number;
   produto: Produto;
   username:string;
@@ -62,10 +63,16 @@ export class ProdutoComponent implements OnInit {
   }
 
   get(){
-
     this.produtoService.get(this.id).subscribe(data=>{
       this.produto = data;
       this.selectedRestricao = data.restricoes;
+      this.listRestricao.forEach(rest => {
+        this.selectedRestricao.forEach(restSelected =>{
+          if(rest.id == restSelected.id){
+            rest.checked = true;
+          }
+        });
+      });
       this.selectedCategoria = data.categoria;
       this.selectedCategoriaNome = data.categoria.nome;
     });
@@ -76,33 +83,19 @@ export class ProdutoComponent implements OnInit {
     this.produto.restricoes = this.selectedRestricao;
     this.produto.categoria = this.selectedCategoria;
     this.produtoService.salvar(this.produto).subscribe(data=>{
-      //this.messageService.openSuccessMessage(translate['FORM_SUCCESS']);
+      this.message = "Produto salvo com sucesso!";
       this.router.navigate(['/admin/produto']);
     });
   }
 
   // Checkbox Change Event
   onItemChangeRestricao(item){
-    var idx = this.selectedRestricao.indexOf(item);
-      
-      // is currently selected
-      if (idx > -1) {
-        this.selectedRestricao.splice(idx, 1);
-      }
-      
-      // is newly selected
-      else {
-        this.selectedRestricao.push(item);
-      }
-  }
-
-  verifychecked(item){
-    var idx = this.selectedRestricao.indexOf(item);
-
-      if (idx > -1) {
-        return true;
-      }
-      return false;
+    const index = this.selectedRestricao.findIndex(x => x.id==item.id);
+    if(index > -1){
+      this.selectedRestricao.splice(index, 1);
+     } else {
+      this.selectedRestricao.push(item);
+    }
   }
 
     // Radio Change Event

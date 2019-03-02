@@ -31,7 +31,7 @@
         </tr>
       </tbody>
     </table>
-    <p [hidden]="produtos.length > 0" class="no-results">Nenhum usuário encontrado</p>
+    <p [hidden]="produtos.length > 0" class="no-results">Nenhum produto encontrado</p>
     <paginator (pageChanged)="pageChanged($event)" [totalElements]="totalRecords" [pageSize]="pageSize" [actualPage]="actualPage"></paginator>
   
     <div class="row">
