@@ -1,0 +1,41 @@
+<h1> Listar Produtos </h1>
+
+<div class="alert alert-success" *ngIf='message'>{{message}}</div>
+
+<div class="container">
+
+    <table class="table table-striped" [hidden]="produtos.length == 0">
+      <thead>
+        <tr>
+          <th scope="col">Codigo</th>
+          <th scope="col">Descricao</th>
+          <th scope="col">Valor Unitário</th>
+          <th scope="col">Restrição</th>
+          <th></th>
+          <th></th>
+        </tr>
+      </thead>
+      <tbody>
+        <!--linha da tabela com as infos -->
+        <tr *ngFor="let row of produtos">
+          <td>{{row.codigo}}</td>
+          <td>{{row.descricao}}</td>
+          <td>{{row.valor}}</td>
+          <td>
+            <div *ngFor="let rest of row.restricoes">
+                {{rest.nome}}
+            </div>
+          </td>
+          <td><button (click)="updateProduto(row.id)" class="btn btn-success">Update</button></td>
+          <td><button (click)="deleteProduto(row.id)" class="btn btn-warning">Delete</button></td>
+        </tr>
+      </tbody>
+    </table>
+    <p [hidden]="produtos.length > 0" class="no-results">Nenhum usuário encontrado</p>
+    <paginator (pageChanged)="pageChanged($event)" [totalElements]="totalRecords" [pageSize]="pageSize" [actualPage]="actualPage"></paginator>
+  
+    <div class="row">
+      <button (click)="novo()" class="btn btn-success">Novo</button>
+  </div>
+
+</div>

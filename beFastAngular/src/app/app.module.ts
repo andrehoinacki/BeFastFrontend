@@ -15,6 +15,8 @@ import { TodoComponent } from './todo/todo.component';
 import { ListTodosComponent } from './list-todos/list-todos.component';
 import { UsuarioComponent } from './admin/usuario/usuario.component';
 import { ListUsuarioComponent } from './admin/list-usuario/list-usuario.component';
+import { ProdutoComponent } from './admin/produto/produto.component';
+import { ListProdutoComponent } from './admin/list-produto/list-produto.component';
 import { HttpIntercepterBasicAuthService } from './service/http/http-intercepter-basic-auth.service';
 import { PaginatorComponent } from './util/paginator/paginator.component';
 
@@ -31,6 +33,8 @@ import { PaginatorComponent } from './util/paginator/paginator.component';
     ListTodosComponent,
     UsuarioComponent,
     ListUsuarioComponent,
+    ProdutoComponent,
+    ListProdutoComponent,
     PaginatorComponent
   ],
   imports: [

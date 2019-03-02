@@ -4,6 +4,8 @@ import { LogoutComponent } from './logout/logout.component';
 import { ListTodosComponent } from './list-todos/list-todos.component';
 import { ListUsuarioComponent } from './admin/list-usuario/list-usuario.component';
 import { UsuarioComponent } from './admin/usuario/usuario.component';
+import { ListProdutoComponent } from './admin/list-produto/list-produto.component';
+import { ProdutoComponent } from './admin/produto/produto.component';
 import { WelcomeComponent } from './welcome/welcome.component';
 import { NgModule } from '@angular/core';
 import { Routes, RouterModule } from '@angular/router';
@@ -40,6 +42,20 @@ const routes: Routes = [
     path : 'admin/usuario/:id',
     data: { expectedRole: ['ROLE_ADMIN', 'ROLE_FUNCIONARIO']}, 
     component : UsuarioComponent, 
+    canActivate : [RouteGuardService] 
+  },
+
+  { 
+    path : 'admin/produto',
+    data: { expectedRole: ['ROLE_ADMIN', 'ROLE_FUNCIONARIO']}, 
+    component : ListProdutoComponent, 
+    canActivate : [RouteGuardService] 
+  },
+
+  { 
+    path : 'admin/produto/:id',
+    data: { expectedRole: ['ROLE_ADMIN', 'ROLE_FUNCIONARIO']}, 
+    component : ProdutoComponent, 
     canActivate : [RouteGuardService] 
   },
 

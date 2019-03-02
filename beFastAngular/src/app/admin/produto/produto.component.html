@@ -1,0 +1,42 @@
+<H1>Cadastro de Produto</H1>
+
+<div class="container">
+  <div class="alert alert-warning" *ngIf="produtoForm.dirty && produtoForm.invalid">Enter valid values</div>
+  
+  <form (ngSubmit)="!produtoForm.invalid && saveProduto()" #produtoForm="ngForm">
+    <fieldset class="form-group">
+        <label>Código</label>
+        <input type="text" #nome="ngModel" 
+              [(ngModel)]="produto.codigo" class="form-control" 
+                  name="codigo" required="required" >
+      </fieldset>
+    <fieldset class="form-group">
+      <label>Descricao</label>
+      <input type="text" #nome="ngModel" 
+            [(ngModel)]="produto.descricao" class="form-control" 
+                name="descricao" required="required" >
+    </fieldset>
+    <fieldset class="form-group">
+      <label>Valor</label>
+      <input type="number" #username="ngModel" 
+            [(ngModel)]="produto.valor" class="form-control" 
+                name="valor" required="required" >
+    </fieldset>
+    <fieldset class="form-group">
+      <label>Categoria</label>
+      <div *ngFor="let item of listCategoria">
+          <input type="radio" [(ngModel)]="selectedCategoriaNome" name="list_item" value ="{{item.nome}}" (change)="onItemChangeCategoria(item)"/> 
+          {{item.nome}}
+      </div>
+    </fieldset>
+    <fieldset class="form-group">
+      <label>Restricões</label>
+      <div *ngFor="let r of listRestricao">
+          <input type="checkbox" ng-checked="verifychecked(r)" (change)="onItemChangeRestricao(r)"/> 
+          {{r.nome}}
+      </div>
+    </fieldset>
+
+    <button type="submit" class="btn btn-success">Salvar</button>
+  </form>  
+</div>
