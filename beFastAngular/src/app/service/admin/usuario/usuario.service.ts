@@ -38,13 +38,21 @@ salvar(data : Usuario) : Observable <any> {
   }
 }
 
-get(id) : Observable <any> {
-  return this.http.get(`${API_URL}/admin/usuario/${id}`).pipe(
-      map(
-          data => data
-      )
-  );
-}
+  get(id) : Observable <any> {
+    return this.http.get(`${API_URL}/admin/usuario/${id}`).pipe(
+        map(
+            data => data
+        )
+    );
+  }
+
+  getByMatricula(matricula) : Observable <any> {
+    return this.http.get(`${API_URL}/admin/usuario/${matricula}`).pipe(
+        map(
+            data => data
+        )
+    );
+  }
 
   deleteUsuario(id){
     return this.http.delete(`${API_URL}/admin/usuario/${id}`);

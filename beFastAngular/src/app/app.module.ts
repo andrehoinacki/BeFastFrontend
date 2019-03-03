@@ -19,6 +19,7 @@ import { ProdutoComponent } from './admin/produto/produto.component';
 import { ListProdutoComponent } from './admin/list-produto/list-produto.component';
 import { HttpIntercepterBasicAuthService } from './service/http/http-intercepter-basic-auth.service';
 import { PaginatorComponent } from './util/paginator/paginator.component';
+import { CreditoComponent } from './venda/venda-credito/credito.component';
 
 @NgModule({
   declarations: [
@@ -35,7 +36,8 @@ import { PaginatorComponent } from './util/paginator/paginator.component';
     ListUsuarioComponent,
     ProdutoComponent,
     ListProdutoComponent,
-    PaginatorComponent
+    PaginatorComponent,
+    CreditoComponent
   ],
   imports: [
     BrowserModule,

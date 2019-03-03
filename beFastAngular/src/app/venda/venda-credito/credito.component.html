@@ -1,0 +1,29 @@
+<H1>Compra de Crédito</H1>
+
+<div class="container">
+  <div class="alert alert-warning" *ngIf="creditoForm.dirty && creditoForm.invalid">Enter valid values</div>
+  
+  <form (ngSubmit)="!creditoForm.invalid && saveSaldo()" #creditoForm="ngForm">
+    <fieldset class="form-group">
+      <label>Matricula:</label>
+      <input type="text" #nome="ngModel" 
+            [(ngModel)]="matricula" class="form-control" 
+                name="matricula" required="required" (focusout)="getUsuario()">
+    </fieldset>
+    <fieldset class="form-group">
+      <label>Valor:</label>
+      <input type="number" #username="ngModel" 
+            [(ngModel)]="valor" class="form-control" 
+                name="valor" required="required" >
+    </fieldset>
+    <fieldset class="form-group">
+        <label>Forma de Pagamento:</label>
+        <div *ngFor="let fp of listFormaPgto">
+            <input type="radio" [(ngModel)]="selectedFormaPgtoNome" name="list_name" value ="{{fp.nome}}" (change)="onItemChange(fp)"/> 
+            {{fp.nome}}
+        </div>
+      </fieldset>
+
+    <button type="submit" class="btn btn-success">Salvar</button>
+  </form>  
+</div>
