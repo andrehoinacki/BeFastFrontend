@@ -17,10 +17,16 @@
                 name="descricao" required="required" >
     </fieldset>
     <fieldset class="form-group">
+      <label>Quantidade</label>
+      <input type="number" #username="ngModel" 
+            [(ngModel)]="produto.quantidade" class="form-control" 
+                name="quantidade" required="required" min="1">
+    </fieldset>
+    <fieldset class="form-group">
       <label>Valor</label>
       <input type="number" #username="ngModel" 
             [(ngModel)]="produto.valor" class="form-control" 
-                name="valor" required="required" >
+                name="valor" required="required">
     </fieldset>
     <fieldset class="form-group">
       <label>Categoria</label>

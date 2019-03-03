@@ -7,5 +7,6 @@ export class Produto {
     public descricao : string;
     public categoria : Categoria;
     public valor : number;
+    public quantidade : number;
     public restricoes : Array<any> = [];
   }
