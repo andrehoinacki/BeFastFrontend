@@ -22,15 +22,24 @@
             [(ngModel)]="usuario.password" class="form-control" 
                 name="password" required="required" >
     </fieldset>
-    <fieldset class="form-group">
+    <fieldset class="form-group" style="float: left;margin-right: 150px;">
         <label>Role</label>
         <div class="list-group-item"  *ngFor="let item of listRole">
             <input type="radio" [(ngModel)]="selectedRoleNome" name="list_name" value ="{{item.nome}}" (change)="onItemChange(item)"/> 
             {{item.nome}}
 
         </div>
-      </fieldset>
-
-    <button type="submit" class="btn btn-success">Salvar</button>
+    </fieldset>
+    <fieldset class="form-group">
+      <label>Restricões</label>
+      <div class="list-group-item" *ngFor="let r of listRestricao">
+          <input type="checkbox" checked ="{{r.checked}}" name=restricoes value={{r}} (change)="onItemChangeRestricao(r)"/> 
+          {{r.id}} - {{r.nome}}
+      </div>
+    </fieldset>
+    <fieldset class="form-group" style="margin-top: 90px;">
+      <button style="margin-right: 15px;" (click)="cancelar()" class="btn btn-danger">Cancelar</button>
+      <button type="submit" class="btn btn-success">Salvar</button>          
+    </fieldset>
   </form>  
 </div>
