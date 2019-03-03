@@ -4,7 +4,6 @@ import { RestricaoService } from '../../service/admin/restricao/restricao.servic
 import { CategoriaService } from '../../service/admin/categoria/categoria.service';
 import { Component, OnInit } from '@angular/core';
 import { Produto } from '../produto/produto.model';
-import { Restricao } from '../restricao/restricao.model';
 import { Categoria } from '../categoria/categoria.model';
 
 @Component({
@@ -14,11 +13,10 @@ import { Categoria } from '../categoria/categoria.model';
   providers: [ProdutoService, RestricaoService, CategoriaService]
 })
 export class ProdutoComponent implements OnInit {
-
-  message: string;
+  
   id:number;
+  message: string;
   produto: Produto;
-  username:string;
   selectedRestricao : Array<any>;
   selectedCategoria : Categoria;
   
@@ -55,7 +53,15 @@ export class ProdutoComponent implements OnInit {
   }
 
   loadRestricoes(){
-    this.restricaoService.list().subscribe(data=>this.listRestricao=data);
+    this.restricaoService.list().subscribe(data=>{
+      data.forEach(restricao => {
+        const index = data.findIndex(x => restricao.nome=="CALORICA");
+        if(index > -1){
+          data.splice(index, 1);
+        }
+      });
+      this.listRestricao=data;
+    });
   }
 
   loadCategorias(){
@@ -76,7 +82,6 @@ export class ProdutoComponent implements OnInit {
       this.selectedCategoria = data.categoria;
       this.selectedCategoriaNome = data.categoria.nome;
     });
-
   }
   
   saveProduto() {

@@ -8,5 +8,6 @@ export class Produto {
     public categoria : Categoria;
     public valor : number;
     public quantidade : number;
+    public valorCalorico : number;
     public restricoes : Array<any> = [];
   }
