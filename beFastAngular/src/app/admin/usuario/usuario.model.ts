@@ -6,4 +6,5 @@ export class Usuario {
     public username : string;
     public password : string;
     public role : Role
+    public restricoes : Array<any> = [];
   }
