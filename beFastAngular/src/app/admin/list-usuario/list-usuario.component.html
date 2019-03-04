@@ -10,6 +10,7 @@
           <th scope="col">Nome</th>
           <th scope="col">Usuário</th>
           <th scope="col">Role</th>
+          <th scope="col">Restrições</th>
           <th></th>
           <th></th>
         </tr>
@@ -20,6 +21,11 @@
           <td>{{row.nome}}</td>
           <td>{{row.username}}</td>
           <td>{{row.role.nome}}</td>
+          <td>
+            <div *ngFor="let rest of row.restricoes">
+                {{rest.nome}}
+            </div>
+          </td>
           <td><button (click)="updateUsuario(row.id)" class="btn btn-success">Update</button></td>
           <td><button (click)="deleteUsuario(row.id)" class="btn btn-warning">Delete</button></td>
         </tr>

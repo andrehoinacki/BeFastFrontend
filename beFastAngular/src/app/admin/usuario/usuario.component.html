@@ -40,7 +40,7 @@
     <fieldset class="form-group" style="margin-right: 50px;">
       <label>Restricões</label>
       <div class="list-group-item" *ngFor="let r of listRestricao; let i = index;" > 
-          <input type="checkbox" checked ="r.checked" name=restricoes value={{r}} (change)="onItemChangeRestricao(r)"/> 
+          <input type="checkbox" checked ="{{r.checked}}" name=restricoes value={{r}} (change)="onItemChangeRestricao(r)"/> 
           {{r.id}} - {{r.nome}}
       </div>      
     </fieldset>    

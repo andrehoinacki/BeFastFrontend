@@ -21,6 +21,7 @@ export class UsuarioComponent implements OnInit {
   selectedRestricao : Array<any>;
   selectedRoleNome : string;
   isCalorico : boolean
+  isSelecionado : boolean
 
   listRole = [];
   listRestricao = [];
@@ -65,7 +66,7 @@ export class UsuarioComponent implements OnInit {
 
   get(){
 
-    this.usuarioService.get(this.id).subscribe(data=>{
+    this.usuarioService.get(this.id).subscribe(data=>{      
       this.usuario = data;
       this.selectedRole = data.role;
       this.selectedRoleNome = data.role.nome;
@@ -73,11 +74,12 @@ export class UsuarioComponent implements OnInit {
       this.listRestricao.forEach(rest => {
         this.selectedRestricao.forEach(restSelected =>{
           if(rest.id == restSelected.id){
+            console.log(rest.nome);
             rest.checked = true;
-            if (rest.nome == 'Calórica') {
+            if (rest.nome == 'CALÓRICA') {
               this.isCalorico = true;
-            }   
-          }                   
+            } 
+          }                 
         });
       });
     });    
@@ -102,18 +104,23 @@ export class UsuarioComponent implements OnInit {
   // Checkbox Change Event
   onItemChangeRestricao(item){    
     const index = this.selectedRestricao.findIndex(x => x.id==item.id);    
-    const nome = item.nome;           
-    item.checked = !item.checked;        
+    const nome = item.nome; 
+      
+    // item.checked = !item.checked;        
     if(index > -1){
-      this.selectedRestricao.splice(index, 1);
+      this.selectedRestricao.splice(index, 1);      
+      this.isSelecionado = false;
      } else {
       this.selectedRestricao.push(item);
+      this.isSelecionado = true;
     }            
-    if (nome == 'Calórica' && item.checked) {
-      this.isCalorico = true;
-    } else {
+    if (nome == 'CALÓRICA' && this.isSelecionado) {
+      this.isCalorico = true;      
+    } else if (nome == 'CALÓRICA' && !this.isSelecionado){
       this.isCalorico = false;
-    }       
+    }         
+    
+    console.log(nome + ' ' +this.isSelecionado);
   }
 
   cancelar(){
