@@ -20,6 +20,7 @@ export class UsuarioComponent implements OnInit {
   selectedRole : Role;
   selectedRestricao : Array<any>;
   selectedRoleNome : string;
+  isCalorico : boolean
 
   listRole = [];
   listRestricao = [];
@@ -51,7 +52,7 @@ export class UsuarioComponent implements OnInit {
         this.usuario.id = this.id;
         this.get();
       }
-    });
+    });    
   }
 
   loadRoles(){
@@ -73,11 +74,13 @@ export class UsuarioComponent implements OnInit {
         this.selectedRestricao.forEach(restSelected =>{
           if(rest.id == restSelected.id){
             rest.checked = true;
-          }
+            if (rest.nome == 'Calórica') {
+              this.isCalorico = true;
+            }   
+          }                   
         });
       });
-    });
-
+    });    
   }
   
   saveUsuario() {
@@ -97,13 +100,20 @@ export class UsuarioComponent implements OnInit {
   }
 
   // Checkbox Change Event
-  onItemChangeRestricao(item){
-    const index = this.selectedRestricao.findIndex(x => x.id==item.id);
+  onItemChangeRestricao(item){    
+    const index = this.selectedRestricao.findIndex(x => x.id==item.id);    
+    const nome = item.nome;           
+    item.checked = !item.checked;        
     if(index > -1){
       this.selectedRestricao.splice(index, 1);
      } else {
       this.selectedRestricao.push(item);
-    }
+    }            
+    if (nome == 'Calórica' && item.checked) {
+      this.isCalorico = true;
+    } else {
+      this.isCalorico = false;
+    }       
   }
 
   cancelar(){
@@ -113,4 +123,9 @@ export class UsuarioComponent implements OnInit {
   restricoes(){
     this.router.navigate(['admin/usuario']);
   }
+
+  getRestricaoCalorica() {
+    return this.isCalorico;
+  }
+  
 }

@@ -7,4 +7,5 @@ export class Usuario {
     public password : string;
     public role : Role
     public restricoes : Array<any> = [];
+    public valorCalorico : number;
   }
