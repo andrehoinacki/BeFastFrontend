@@ -20,6 +20,7 @@ import { ListProdutoComponent } from './admin/list-produto/list-produto.componen
 import { HttpIntercepterBasicAuthService } from './service/http/http-intercepter-basic-auth.service';
 import { PaginatorComponent } from './util/paginator/paginator.component';
 import { CreditoComponent } from './venda/venda-credito/credito.component';
+import { VendaProdutoComponent } from './venda/venda-produto/venda-produto.component';
 
 @NgModule({
   declarations: [
@@ -37,7 +38,8 @@ import { CreditoComponent } from './venda/venda-credito/credito.component';
     ProdutoComponent,
     ListProdutoComponent,
     PaginatorComponent,
-    CreditoComponent
+    CreditoComponent,    
+    VendaProdutoComponent,    
   ],
   imports: [
     BrowserModule,

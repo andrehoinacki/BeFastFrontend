@@ -12,6 +12,7 @@ import { Routes, RouterModule } from '@angular/router';
 import { LoginComponent } from './login/login.component';
 import { ErrorComponent } from './error/error.component';
 import { CreditoComponent } from './venda/venda-credito/credito.component';
+import { VendaProdutoComponent } from './venda/venda-produto/venda-produto.component';
 
 const routes: Routes = [
   {path:'', component:LoginComponent},
@@ -62,6 +63,12 @@ const routes: Routes = [
     path : 'venda/credito',
     data: { expectedRole: ['ROLE_ADMIN', 'ROLE_FUNCIONARIO']}, 
     component : CreditoComponent, 
+    canActivate : [RouteGuardService] 
+  },
+  { 
+    path : 'venda/produto',
+    data: { expectedRole: ['ROLE_ADMIN', 'ROLE_FUNCIONARIO']}, 
+    component : VendaProdutoComponent, 
     canActivate : [RouteGuardService] 
   },
 
