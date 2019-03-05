@@ -47,7 +47,7 @@ salvar(data : Usuario) : Observable <any> {
   }
 
   getByMatricula(matricula) : Observable <any> {
-    return this.http.get(`${API_URL}/admin/usuario/${matricula}`).pipe(
+    return this.http.get(`${API_URL}/admin/usuario/bymatricula/${matricula}`).pipe(
         map(
             data => data
         )

@@ -1,29 +1,36 @@
 <H1>Compra de Crédito</H1>
 
 <div class="container">
-  <div class="alert alert-warning" *ngIf="creditoForm.dirty && creditoForm.invalid">Enter valid values</div>
+  <div class="alert alert-warning" *ngIf="creditoForm.dirty && creditoForm.invalid">Entre com valores válidos</div>
+  <div class="alert alert-warning" *ngIf="mensagem">{{mensagem}}</div>
   
   <form (ngSubmit)="!creditoForm.invalid && saveSaldo()" #creditoForm="ngForm">
-    <fieldset class="form-group">
-      <label>Matricula:</label>
-      <input type="text" #nome="ngModel" 
+    <fieldset class="form-group" style="float:left; width: 40%; margin-right: 45px;">
+      <label>Matricula:*</label>
+      <input type="text" 
             [(ngModel)]="matricula" class="form-control" 
                 name="matricula" required="required" (focusout)="getUsuario()">
     </fieldset>
-    <fieldset class="form-group">
-      <label>Valor:</label>
-      <input type="number" #username="ngModel" 
-            [(ngModel)]="valor" class="form-control" 
+    <fieldset class="form-group" style="float:left; width: 40%; margin-right: 45px;">
+      <label>Valor:*</label>
+      <input type="number" 
+            [(ngModel)]="saldo.credito" class="form-control" 
                 name="valor" required="required" >
     </fieldset>
-    <fieldset class="form-group">
-        <label>Forma de Pagamento:</label>
+    <fieldset class="form-group" style="float:left; width: 100%; margin-right: 10px;" *ngIf="hasUsuario"> 
+      <label>{{usuario.nome}}, seu saldo atual é de R${{saldoAtual}},00</label>
+    </fieldset>
+    <fieldset class="form-group" style="float:left; width: 100%; margin-right: 100px;">
+        <label>Forma de Pagamento:*</label>
         <div *ngFor="let fp of listFormaPgto">
             <input type="radio" [(ngModel)]="selectedFormaPgtoNome" name="list_name" value ="{{fp.nome}}" (change)="onItemChange(fp)"/> 
             {{fp.nome}}
         </div>
       </fieldset>
-
-    <button type="submit" class="btn btn-success">Salvar</button>
+      <fieldset class="form-group" style="float:right; width: 100%;" >
+          <p>Campos marcados com (*) são obrigatórios!</p>
+          <button style="margin-right: 15px;" (click)="limpar()" class="btn btn-danger">Cancelar</button>
+          <button type="submit" class="btn btn-success">Salvar</button>          
+        </fieldset>
   </form>  
 </div>

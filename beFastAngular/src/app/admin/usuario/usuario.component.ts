@@ -76,7 +76,7 @@ export class UsuarioComponent implements OnInit {
           if(rest.id == restSelected.id){
             console.log(rest.nome);
             rest.checked = true;
-            if (rest.nome == 'CALÓRICA') {
+            if (rest.nome == 'CALORICA') {
               this.isCalorico = true;
             } 
           }                 
@@ -114,9 +114,9 @@ export class UsuarioComponent implements OnInit {
       this.selectedRestricao.push(item);
       this.isSelecionado = true;
     }            
-    if (nome == 'CALÓRICA' && this.isSelecionado) {
+    if (nome == 'CALORICA' && this.isSelecionado) {
       this.isCalorico = true;      
-    } else if (nome == 'CALÓRICA' && !this.isSelecionado){
+    } else if (nome == 'CALORICA' && !this.isSelecionado){
       this.isCalorico = false;
     }         
     

@@ -8,4 +8,6 @@ export class Usuario {
     public role : Role
     public restricoes : Array<any> = [];
     public valorCalorico : number;
+    public matricula : string;
+    public saldo : Array<any> = [];
   }
