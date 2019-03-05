@@ -1,0 +1,77 @@
+<h1> Vendas Befast </h1>
+
+<div class="alert alert-success" *ngIf='message'>{{message}}</div>
+
+<div class="container">
+  <div class="row">
+    <div class="col-md-2">      
+      <label>Matrícula</label>
+    </div>
+    <div class="col-md-4">      
+      <input type="text" #nome="ngModel" [(ngModel)]="usuario.nome" class="form-control" name="nome"
+        required="required">
+    </div>
+    <div class="col-md-2">
+      <label>Saldo: {{saldo}}</label>      
+    </div>    
+  </div>
+  <div class="row" style="margin-top: 10px;">
+    <div class="col-md-2">      
+        <label>Produto</label>
+    </div>
+    <div class="col-md-4">            
+      <input type="text" #username="ngModel" [(ngModel)]="usuario.username" class="form-control" name="username"
+        required="required">
+    </div>
+    <div class="col-md-2">
+      <label>Quantidade</label>
+    </div>
+    <div class="col-md-2">
+      <input type="text" #username="ngModel" [(ngModel)]="usuario.username" class="form-control" name="username"
+        required="required">
+    </div>
+    <div class="col-md-2">
+        <button (click)="adicionarProduto()" class="btn btn-info">Incluir</button>
+      </div>    
+  </div>
+</div>
+
+<div class="container" style="margin-top: 50px;">
+  <table class="table table-striped">
+    <thead>
+      <tr>
+        <th scope="col">Categoria</th>
+        <th scope="col">Produto</th>
+        <th scope="col">Código</th>
+        <th scope="col">Quantidade</th>
+        <th scope="col">Valor</th>
+        <th scope="col">Restrições</th>
+        <th></th>
+        <th></th>
+      </tr>
+    </thead>
+    <tbody>
+      <!--linha da tabela com as infos -->
+      <tr *ngFor="let row of usuarios">
+        <td>{{row.nome}}</td>
+        <td>{{row.username}}</td>
+        <td>{{row.role.nome}}</td>
+        <td>
+          <div *ngFor="let rest of row.restricoes">
+            {{rest.nome}}
+          </div>
+        </td>
+        <td><button (click)="deleteUsuario(row.id)" class="btn btn-warning">Delete</button></td>
+      </tr>
+    </tbody>
+  </table>
+  <p [hidden]="usuarios.length > 0" class="no-results">Nenhum produto inserido</p>
+  <paginator (pageChanged)="pageChanged($event)" [totalElements]="totalRecords" [pageSize]="pageSize"
+    [actualPage]="actualPage"></paginator>
+
+  <div class="row">
+    <button style="margin-right: 15px;" (click)="cancelarVenda()" class="btn btn-danger">Cancelar Venda</button>
+    <button (click)="finalizarVenda()" class="btn btn-success">Finalizar Venda</button>
+  </div>
+
+</div>
