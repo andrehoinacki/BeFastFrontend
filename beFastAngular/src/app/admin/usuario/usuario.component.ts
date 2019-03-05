@@ -120,19 +120,11 @@ export class UsuarioComponent implements OnInit {
       this.isCalorico = false;
     }         
     
-    console.log(nome + ' ' +this.isSelecionado);
+    console.log(nome + ' ' +this.isSelecionado + this.isCalorico);
   }
 
   cancelar(){
     this.router.navigate(['admin/usuario']);
   }
-
-  restricoes(){
-    this.router.navigate(['admin/usuario']);
-  }
-
-  getRestricaoCalorica() {
-    return this.isCalorico;
-  }
-  
+ 
 }
