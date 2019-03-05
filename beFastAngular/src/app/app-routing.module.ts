@@ -13,6 +13,7 @@ import { LoginComponent } from './login/login.component';
 import { ErrorComponent } from './error/error.component';
 import { CreditoComponent } from './venda/venda-credito/credito.component';
 import { VendaProdutoComponent } from './venda/venda-produto/venda-produto.component';
+import { VincularUsuarioComponent } from './admin/vincular-usuario/vincular-usuario.component';
 
 const routes: Routes = [
   {path:'', component:LoginComponent},
@@ -69,6 +70,12 @@ const routes: Routes = [
     path : 'venda/produto',
     data: { expectedRole: ['ROLE_ADMIN', 'ROLE_FUNCIONARIO']}, 
     component : VendaProdutoComponent, 
+    canActivate : [RouteGuardService] 
+  },
+  { 
+    path : 'admin/usuario/vincular/:id',
+    data: { expectedRole: ['ROLE_ADMIN', 'ROLE_FUNCIONARIO']}, 
+    component : VincularUsuarioComponent, 
     canActivate : [RouteGuardService] 
   },
 

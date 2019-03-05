@@ -21,6 +21,7 @@ import { HttpIntercepterBasicAuthService } from './service/http/http-intercepter
 import { PaginatorComponent } from './util/paginator/paginator.component';
 import { CreditoComponent } from './venda/venda-credito/credito.component';
 import { VendaProdutoComponent } from './venda/venda-produto/venda-produto.component';
+import { VincularUsuarioComponent } from './admin/vincular-usuario/vincular-usuario.component';
 
 @NgModule({
   declarations: [
@@ -39,7 +40,8 @@ import { VendaProdutoComponent } from './venda/venda-produto/venda-produto.compo
     ListProdutoComponent,
     PaginatorComponent,
     CreditoComponent,    
-    VendaProdutoComponent,    
+    VendaProdutoComponent, 
+    VincularUsuarioComponent,    
   ],
   imports: [
     BrowserModule,

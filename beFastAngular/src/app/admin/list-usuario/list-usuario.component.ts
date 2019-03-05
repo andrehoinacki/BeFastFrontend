@@ -61,6 +61,10 @@ export class ListUsuarioComponent implements OnInit {
     this.router.navigate(['admin/usuario', -1]);
   }
 
+  vincularUsuario(id) {    
+    this.router.navigate(['admin/usuario/vincular',id])
+  }
+
   pesquisar(){
     this.actualPage = 1;
     this.object_filter.pageNumber = 1;

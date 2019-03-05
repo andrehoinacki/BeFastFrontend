@@ -1,0 +1,47 @@
+<H1>Vincular Usuários</H1>
+
+<div class="container">
+  <div class="alert alert-warning" *ngIf="vincularForm.dirty && vincularForm.invalid">Entre com valores válidos</div>
+  <div class="alert alert-warning" *ngIf="mensagem">{{mensagem}}</div>
+
+  <form (ngSubmit)="!vincularForm.invalid && getUsuario()" #vincularForm="ngForm">
+    <fieldset class="form-group" style="float:left; width: 40%; margin-right: 45px;">
+      <label>Matricula:*</label>
+      <input type="text" [(ngModel)]="matricula" class="form-control" name="matricula" required="required">
+    </fieldset>
+  </form>
+  <fieldset class="form-group" style="float:left; width: 100%; margin-right: 100px;">
+    <table class="table table-striped">
+      <thead>
+        <tr>
+          <th scope="col">Nome</th>
+          <th scope="col">Usuário</th>
+          <th scope="col">Matrícula</th>
+          <th scope="col">Role</th>
+          <th></th>
+          <th></th>
+        </tr>
+      </thead>
+      <tbody>
+        <!--linha da tabela com as infos -->
+        <tr *ngFor="let row of usuarios; let i = index">
+          <td>{{row.nome}}</td>
+          <td>{{row.username}}</td>
+          <td>{{row.matricula}}</td>
+          <td>{{row.role.nome}}</td>
+          <td><button (click)="retirarVinculo(i)" class="btn btn-warning">Delete</button></td>
+        </tr>
+      </tbody>
+    </table>
+  </fieldset>
+
+
+  <fieldset class="form-group" style="float:left; width: 100%; margin-right: 100px;">
+    <fieldset class="form-group" style="float:right; width: 100%;">
+      <p>Campos marcados com (*) são obrigatórios!</p>
+      <button style="margin-right: 15px;" (click)="cancelar()" class="btn btn-danger">Cancelar</button>
+      <button type="button" (click)="saveUsuario()" class="btn btn-success">Salvar</button>
+    </fieldset>
+  </fieldset>
+
+</div>

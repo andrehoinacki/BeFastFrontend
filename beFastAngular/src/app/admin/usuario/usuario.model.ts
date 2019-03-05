@@ -10,4 +10,5 @@ export class Usuario {
     public valorCalorico : number;
     public matricula : string;
     public saldo : Array<any> = [];
+    public usuarios : Array<any> = [];
   }

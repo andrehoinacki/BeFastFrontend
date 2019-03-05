@@ -22,6 +22,14 @@ export class UsuarioService {
     );
 }
 
+listVinculo(id) : Observable <any> {
+  return this.http.get(`${API_URL}/admin/usuario/listvinculo/${id}`).pipe(
+      map(
+          data => data
+      )
+  );
+}
+
 salvar(data : Usuario) : Observable <any> {
   if(data.id == null){
       return this.http.post(`${API_URL}/admin/usuario/novo`,data).pipe(
