@@ -15,7 +15,9 @@ export class VincularUsuarioComponent implements OnInit {
   usuario : Usuario;
   matricula : string;    
   hasUsuario : boolean = false;
-  usuarios: Usuario[] = []
+  usuarios = []
+  nomeAluno : string;
+  mensagem : string;
 
   object_filter : UsuarioFilter = new UsuarioFilter;
 
@@ -33,22 +35,28 @@ export class VincularUsuarioComponent implements OnInit {
         this.usuario.id = this.id;
         this.get();
       }
-    }); 
-    this.load();   
+    });  
   }
 
   get(){
     this.usuarioService.get(this.id).subscribe(data=>{      
-      this.usuario = data;      
+      this.usuario = data; 
+      this.usuarios = data.usuarios;     
     });    
   }
 
   getUsuario(){        
     this.usuarioService.getByMatricula(this.matricula).subscribe(data=> {      
       if (data != null) {
+        this.nomeAluno = data.nome;
         this.usuarios.push(data);
+        this.hasUsuario = true;
+        this.matricula = null;
+      } else {
+        this.mensagem = "Usuário não encontrado";
+        this.hasUsuario = false;
       }      
-      this.hasUsuario = true;      
+            
     });        
   }
 
@@ -62,16 +70,9 @@ export class VincularUsuarioComponent implements OnInit {
   }
 
   saveUsuario() {    
-    this.usuario.usuarios = this.usuarios;
+    //this.usuario.usuarios.push(this.usuarios);
     this.usuarioService.salvar(this.usuario).subscribe(data=>{      
       this.router.navigate(['/admin/usuario']);
-    });
-  }
-
-  load(){
-    const filtro = Object.assign(this.object_filter);
-    this.usuarioService.listVinculo(this.usuario.id).subscribe(data=>{
-      this.usuarios=data['listVinculo'];      
     });
   }
 }
