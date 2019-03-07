@@ -59,6 +59,7 @@ export class LoginComponent implements OnInit {
               this.router.navigate(['aluno', this.username])
             } else if 
             (data.role == "ROLE_RESPONSAVEL") {
+              console.log("responsavel");
               this.router.navigate(['responsavel', this.username])
             } else {
               // this.basicAuthenticationService.saveUserLogin(data.json());

@@ -15,6 +15,7 @@ import { CreditoComponent } from './venda/venda-credito/credito.component';
 import { VendaProdutoComponent } from './venda/venda-produto/venda-produto.component';
 import { VincularUsuarioComponent } from './admin/vincular-usuario/vincular-usuario.component';
 import { ConsultaSadoComponent } from './aluno/consulta-saldo.component';
+import { ListAlunosComponent } from './responsavel/list-alunos/list-alunos.component';
 
 const routes: Routes = [
   {path:'', component:LoginComponent},
@@ -35,8 +36,8 @@ const routes: Routes = [
   },
   {
     path : 'responsavel/:name',
-    data: { expectedRole: ['ROLE_RESPOSAVEL']},
-    component : WelcomeComponent, 
+    data: { expectedRole: ['ROLE_RESPONSAVEL']},
+    component : ListAlunosComponent, 
     canActivate : [RouteGuardService]
   },
   { 
