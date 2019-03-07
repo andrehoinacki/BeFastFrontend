@@ -22,6 +22,7 @@ import { PaginatorComponent } from './util/paginator/paginator.component';
 import { CreditoComponent } from './venda/venda-credito/credito.component';
 import { VendaProdutoComponent } from './venda/venda-produto/venda-produto.component';
 import { VincularUsuarioComponent } from './admin/vincular-usuario/vincular-usuario.component';
+import { ConsultaSadoComponent } from './aluno/consulta-saldo.component';
 
 @NgModule({
   declarations: [
@@ -41,7 +42,8 @@ import { VincularUsuarioComponent } from './admin/vincular-usuario/vincular-usua
     PaginatorComponent,
     CreditoComponent,    
     VendaProdutoComponent, 
-    VincularUsuarioComponent,    
+    VincularUsuarioComponent, 
+    ConsultaSadoComponent,   
   ],
   imports: [
     BrowserModule,

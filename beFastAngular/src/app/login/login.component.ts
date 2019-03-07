@@ -55,8 +55,15 @@ export class LoginComponent implements OnInit {
         .subscribe(
           data => {
             console.log(data)
-           // this.basicAuthenticationService.saveUserLogin(data.json());
-            this.router.navigate(['welcome', this.username])
+            if(data.role == "ROLE_ALUNO") {
+              this.router.navigate(['aluno', this.username])
+            } else if 
+            (data.role == "ROLE_RESPONSAVEL") {
+              this.router.navigate(['responsavel', this.username])
+            } else {
+              // this.basicAuthenticationService.saveUserLogin(data.json());
+              this.router.navigate(['welcome', this.username])
+            }
             this.invalidLogin = false      
           },
           error => {
