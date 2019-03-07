@@ -30,6 +30,11 @@ export class AutenticacaoService {
     return !(user === null)
   }
 
+  isFuncionario() {
+    let usuario = JSON.parse(sessionStorage.getItem('usuarioLogado'));
+    return !(usuario !== null && usuario.role === 'ROLE_ALUNO');
+  }
+
   logout(){
     localStorage.clear();
     sessionStorage.clear();

@@ -14,6 +14,7 @@ import { ErrorComponent } from './error/error.component';
 import { CreditoComponent } from './venda/venda-credito/credito.component';
 import { VendaProdutoComponent } from './venda/venda-produto/venda-produto.component';
 import { VincularUsuarioComponent } from './admin/vincular-usuario/vincular-usuario.component';
+import { ConsultaSadoComponent } from './aluno/consulta-saldo.component';
 
 const routes: Routes = [
   {path:'', component:LoginComponent},
@@ -22,11 +23,22 @@ const routes: Routes = [
   
   {
     path : 'welcome/:name',
-    data: { expectedRole: ['ROLE_ADMIN', 'ROLE_FUNCIONARIO', 'ROLE_RESPOSAVEL','ROLE_ALUNO']},
+    data: { expectedRole: ['ROLE_ADMIN', 'ROLE_FUNCIONARIO']},
     component : WelcomeComponent, 
     canActivate : [RouteGuardService]
   },
-
+  {
+    path : 'aluno/:name',
+    data: { expectedRole: ['ROLE_ALUNO']},
+    component : ConsultaSadoComponent, 
+    canActivate : [RouteGuardService]
+  },
+  {
+    path : 'responsavel/:name',
+    data: { expectedRole: ['ROLE_RESPOSAVEL']},
+    component : WelcomeComponent, 
+    canActivate : [RouteGuardService]
+  },
   { 
     path : 'todos',
     data: { expectedRole: ['ROLE_ADMIN']}, 

@@ -4,7 +4,7 @@ import { Component, OnInit } from '@angular/core';
 import { Usuario } from '../../admin/usuario/usuario.model';
 import { FormaPagamento } from '../forma-pagamento/formapgto.model';
 import { FormaPagamentoService } from 'src/app/service/util/forma-pagamento/formapgto.service';
-import { Saldo } from '../saldo/saldo.model';
+import { Saldo } from '../../util/saldo/saldo.model';
 
 @Component({
   selector: 'app-credito',

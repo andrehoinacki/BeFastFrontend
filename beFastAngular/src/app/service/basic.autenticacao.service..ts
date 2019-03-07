@@ -83,8 +83,9 @@ export class BasicAutenticacaoService {
   }
 
   public saveUserLogin(result : any){
-    localStorage.setItem('token', result.token);
+    localStorage.setItem(TOKEN, result.token);
     localStorage.setItem('role', result.role);
+    sessionStorage.setItem('usuarioLogado', JSON.stringify(result));
 
     /**
      * Caso usuário seja um aluno
