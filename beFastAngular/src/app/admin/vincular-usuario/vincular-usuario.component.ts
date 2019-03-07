@@ -15,9 +15,11 @@ export class VincularUsuarioComponent implements OnInit {
   usuario : Usuario;
   matricula : string;    
   hasUsuario : boolean = false;
+  isResponsavel : boolean = true;
   usuarios = []
   nomeAluno : string;
   mensagem : string;
+  jaInserido : boolean = false;
 
   object_filter : UsuarioFilter = new UsuarioFilter;
 
@@ -41,17 +43,37 @@ export class VincularUsuarioComponent implements OnInit {
   get(){
     this.usuarioService.get(this.id).subscribe(data=>{      
       this.usuario = data; 
-      this.usuarios = data.usuarios;     
+      this.usuarios = data.usuarios;
+      if (data.role.nome == 'ROLE_RESPOSAVEL') {
+        this.isResponsavel = false;
+      }     
+      console.log(data.role.nome + this.isResponsavel);
     });    
   }
 
-  getUsuario(){        
-    this.usuarioService.getByMatricula(this.matricula).subscribe(data=> {      
+  getUsuario(){            
+    this.usuarioService.getByMatricula(this.matricula).subscribe(data=> {       
       if (data != null) {
-        this.nomeAluno = data.nome;
-        this.usuarios.push(data);
-        this.hasUsuario = true;
-        this.matricula = null;
+        this.usuarios.forEach(rest => {
+          if (data.id == rest.id) {
+            this.jaInserido = true;            
+          }
+        });    
+        if (this.jaInserido) {
+          this.mensagem = "Usuário já inserido";
+          this.hasUsuario = false;
+        } else if (data.id == this.id) {
+          this.mensagem = "Não é possível vincular o mesmo usuário da edição";
+          this.hasUsuario = false;
+        } else if (data.role.nome != 'ROLE_ALUNO') {
+          this.mensagem = "Não é possível vincular um usuário com perfil diferente de 'ROLE_ALUNO'";
+          this.hasUsuario = false;
+        } else {
+          this.nomeAluno = data.nome;
+          this.usuarios.push(data);
+          this.hasUsuario = true;
+          this.matricula = null;
+        }
       } else {
         this.mensagem = "Usuário não encontrado";
         this.hasUsuario = false;
@@ -69,10 +91,10 @@ export class VincularUsuarioComponent implements OnInit {
     this.router.navigate(['admin/usuario']);
   }
 
-  saveUsuario() {    
-    //this.usuario.usuarios.push(this.usuarios);
+  saveUsuario() {        
     this.usuarioService.salvar(this.usuario).subscribe(data=>{      
       this.router.navigate(['/admin/usuario']);
     });
   }
+  
 }
