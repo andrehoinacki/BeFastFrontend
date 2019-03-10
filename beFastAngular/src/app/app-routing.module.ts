@@ -15,6 +15,7 @@ import { CreditoComponent } from './venda/venda-credito/credito.component';
 import { VendaProdutoComponent } from './venda/venda-produto/venda-produto.component';
 import { VincularUsuarioComponent } from './admin/vincular-usuario/vincular-usuario.component';
 import { ConsultaSadoComponent } from './aluno/consulta-saldo.component';
+import { FinalizarVendaComponent } from './venda/finalizar-venda/finalizar-venda.component';
 
 const routes: Routes = [
   {path:'', component:LoginComponent},
@@ -88,6 +89,12 @@ const routes: Routes = [
     path : 'admin/usuario/vincular/:id',
     data: { expectedRole: ['ROLE_ADMIN', 'ROLE_FUNCIONARIO']}, 
     component : VincularUsuarioComponent, 
+    canActivate : [RouteGuardService] 
+  },
+  { 
+    path : 'venda/finalizar/:id',
+    data: { expectedRole: ['ROLE_ADMIN', 'ROLE_FUNCIONARIO']}, 
+    component : FinalizarVendaComponent, 
     canActivate : [RouteGuardService] 
   },
 

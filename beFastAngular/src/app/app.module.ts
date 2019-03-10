@@ -23,6 +23,7 @@ import { CreditoComponent } from './venda/venda-credito/credito.component';
 import { VendaProdutoComponent } from './venda/venda-produto/venda-produto.component';
 import { VincularUsuarioComponent } from './admin/vincular-usuario/vincular-usuario.component';
 import { ConsultaSadoComponent } from './aluno/consulta-saldo.component';
+import { FinalizarVendaComponent } from './venda/finalizar-venda/finalizar-venda.component';
 
 @NgModule({
   declarations: [
@@ -43,7 +44,7 @@ import { ConsultaSadoComponent } from './aluno/consulta-saldo.component';
     CreditoComponent,    
     VendaProdutoComponent, 
     VincularUsuarioComponent, 
-    ConsultaSadoComponent,   
+    ConsultaSadoComponent, FinalizarVendaComponent,   
   ],
   imports: [
     BrowserModule,
