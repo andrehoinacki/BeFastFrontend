@@ -72,7 +72,7 @@ export class VendaProdutoComponent implements OnInit {
     this.venda.data = new Date();
     this.vendaService.salvar(this.venda).subscribe(data=>{
       console.log(data.id);
-      this.router.navigate(['/venda/finalizar'], data.id);
+      this.router.navigate(['/venda/finalizar']);
     });
   }
 

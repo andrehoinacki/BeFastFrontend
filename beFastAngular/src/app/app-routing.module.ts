@@ -92,7 +92,7 @@ const routes: Routes = [
     canActivate : [RouteGuardService] 
   },
   { 
-    path : 'venda/finalizar/:id',
+    path : 'venda/finalizar',
     data: { expectedRole: ['ROLE_ADMIN', 'ROLE_FUNCIONARIO']}, 
     component : FinalizarVendaComponent, 
     canActivate : [RouteGuardService] 

@@ -1,3 +1,24 @@
-<p>
-  finalizar-venda works!
-</p>
+<H1>finalizar Venda</H1>
+
+<div class="container">
+    <div class="alert alert-warning" *ngIf="creditoForm.dirty && creditoForm.invalid">Entre com valores válidos</div>
+    <div class="alert alert-warning" *ngIf="mensagem">{{mensagem}}</div>
+    
+    <form (ngSubmit)="!creditoForm.invalid && saveSaldo()" #creditoForm="ngForm">      
+      <fieldset class="form-group" style="float:left; width: 40%; margin-right: 45px;">
+        <label>Total: {{total}}</label>        
+      </fieldset>      
+      <fieldset class="form-group" style="float:left; width: 100%; margin-right: 100px;">
+          <label>Forma de Pagamento:*</label>
+          <div *ngFor="let fp of listFormaPgto">
+              <input type="radio" [(ngModel)]="selectedFormaPgtoNome" name="list_name" value ="{{fp.nome}}" (change)="onItemChange(fp)"/> 
+              {{fp.nome}}
+          </div>
+        </fieldset>
+        <fieldset class="form-group" style="float:right; width: 100%;" >
+            <p>Campos marcados com (*) são obrigatórios!</p>
+            <button style="margin-right: 15px;" (click)="limpar()" class="btn btn-danger">Cancelar</button>
+            <button type="submit" class="btn btn-success">Salvar</button>          
+          </fieldset>
+    </form>  
+  </div>
