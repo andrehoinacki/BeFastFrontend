@@ -17,6 +17,7 @@ import { VincularUsuarioComponent } from './admin/vincular-usuario/vincular-usua
 import { ConsultaSadoComponent } from './aluno/consulta-saldo.component';
 import { FinalizarVendaComponent } from './venda/finalizar-venda/finalizar-venda.component';
 import { ListAlunosComponent } from './responsavel/list-alunos/list-alunos.component';
+import { ListVendasComponent } from './relatorio/vendas/list-vendas.component';
 
 const routes: Routes = [
   {path:'', component:LoginComponent},
@@ -98,7 +99,14 @@ const routes: Routes = [
     component : FinalizarVendaComponent, 
     canActivate : [RouteGuardService] 
   },
+  { 
+    path : 'relatorio/vendas',
+    data: { expectedRole: ['ROLE_ADMIN']}, 
+    component : ListVendasComponent, 
+    canActivate : [RouteGuardService] 
+  },
 
+  
   {path:'logout', component:LogoutComponent, canActivate : [RouteGuardService]},
   { path: 'todos/:id', component: TodoComponent, canActivate:[RouteGuardService] },
   {path:'**', component:ErrorComponent}

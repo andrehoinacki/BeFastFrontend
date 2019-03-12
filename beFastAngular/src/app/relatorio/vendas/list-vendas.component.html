@@ -1,0 +1,54 @@
+<h1> Relatório de Vendas por Período </h1>
+
+<div class="alert alert-success" *ngIf='message'>{{message}}</div>
+<div class="container">
+  <form (ngSubmit)="!vendasForm.invalid && list()" #vendasForm="ngForm">
+    <div class="row" style="margin-top: 10px;">
+      <div class="col-md-2">
+        <label>Data Inicial</label>
+      </div>
+      <div class="col-md-3">
+        <input type="date" #dataInicial="ngModel" [(ngModel)]="filtro.dataInicial" class="form-control" name="dataInicial"
+          required="required">
+      </div>
+      <div class="col-md-2">
+        <label>Data Final</label>
+      </div>
+      <div class="col-md-3">
+        <input type="date" #dataFinal="ngModel" [(ngModel)]="filtro.dataFinal" class="form-control" name="dataFinal"
+          required="required">
+      </div>
+      <div class="col-md-2">
+        <button type="submit" class="btn btn-info">Listar</button>
+      </div>
+    </div>
+  </form>
+</div>
+<div class="container table-responsive-sm">
+    <table class="table" [hidden]="vendas.length == 0">
+      <thead>
+        <tr>
+          <th scope="col">Data</th>
+          <th scope="col">Produto</th>
+          <th scope="col">Valor Total</th>
+        </tr>
+      </thead>
+      <tbody>
+        <!--linha da tabela com as infos -->
+        <tr *ngFor="let row of vendas">
+          <td>{{row.dataVenda}}</td>
+          <td>
+            <div *ngFor="let i of row.itens">
+              <td style="width: 180px;">{{i.descricao}}</td>
+              <td style="width: 130px;"> Valor Unitário {{i.valor}}</td>
+              <td style="width: 90px;">Quantidade {{i.quantidade}}</td> 
+              <td style="width: 100px;">SubTotal {{i.quantidade * i.valor}}</td> 
+            </div>
+          </td>
+          <td>0</td>
+        </tr>
+      </tbody>
+    </table>
+    <p [hidden]="vendas.length > 0" class="no-results">Nenhuma venda encontrada para o período selecionado</p>
+    <paginator (pageChanged)="pageChanged($event)" [totalElements]="totalRecords" [pageSize]="pageSize" [actualPage]="actualPage"></paginator>
+</div>

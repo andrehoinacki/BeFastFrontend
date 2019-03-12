@@ -25,6 +25,7 @@ import { VincularUsuarioComponent } from './admin/vincular-usuario/vincular-usua
 import { ConsultaSadoComponent } from './aluno/consulta-saldo.component';
 import { FinalizarVendaComponent } from './venda/finalizar-venda/finalizar-venda.component';
 import { ListAlunosComponent } from './responsavel/list-alunos/list-alunos.component';
+import { ListVendasComponent } from './relatorio/vendas/list-vendas.component';
 
 @NgModule({
   declarations: [
@@ -46,8 +47,9 @@ import { ListAlunosComponent } from './responsavel/list-alunos/list-alunos.compo
     VendaProdutoComponent, 
     VincularUsuarioComponent, 
     ConsultaSadoComponent,
-	FinalizarVendaComponent,   
-    ListAlunosComponent   
+	  FinalizarVendaComponent,   
+    ListAlunosComponent,
+    ListVendasComponent   
   ],
   imports: [
     BrowserModule,
