@@ -1,6 +1,6 @@
 <h1> Vendas Befast </h1>
 
-<div class="alert alert-success" *ngIf='message'>{{message}}</div>
+<div class="alert alert-warning" *ngIf="mensagem">{{mensagem}}</div>
 
 <div class="container">
   <form (ngSubmit)="!vendaClienteForm.invalid && getUsuario()" #vendaClienteForm="ngForm">
@@ -13,11 +13,11 @@
           required="required">
       </div>
       <div class="col-md-2">
-        <label>Saldo: {{saldo}}</label>
+        <label>Saldo: R${{saldo}},00</label>
       </div>
     </div>
     <div class="row">
-    <fieldset class="col-md-12" *ngIf="hasUsuario">
+      <fieldset class="col-md-12" *ngIf="hasUsuario">
         <label>Usuário: {{nomeAluno}}</label>
       </fieldset>
     </div>
@@ -63,7 +63,7 @@
     </thead>
     <tbody>
       <!--linha da tabela com as infos -->
-      <tr *ngFor="let row of itens">
+      <tr *ngFor="let row of itens; let i = index">
         <td>{{row.categoria.nome}}</td>
         <td>{{row.descricao}}</td>
         <td>{{row.codigo}}</td>
@@ -74,7 +74,7 @@
             {{rest.nome}}
           </div>
         </td>
-        <td><button (click)="deleteUsuario(row.id)" class="btn btn-warning">Delete</button></td>
+        <td><button (click)="retirarProduto(i)" class="btn btn-warning">Delete</button></td>
       </tr>
     </tbody>
   </table>
@@ -82,7 +82,18 @@
   <paginator (pageChanged)="pageChanged($event)" [totalElements]="totalRecords" [pageSize]="pageSize"
     [actualPage]="actualPage"></paginator>
 
-  <div class="row">
+  <div class="row">    
+    <div class="col-md-12">
+      <label>Forma de Pagamento:*</label>
+      <div *ngFor="let fp of listFormaPgto">
+        <input type="radio" [(ngModel)]="selectedFormaPgtoNome" name="list_name" value="{{fp.nome}}"
+          (change)="onItemChange(fp)" />
+        {{fp.nome}}
+      </div>
+    </div>    
+  </div>
+
+  <div class="row" style="margin-top: 20px;">
     <button style="margin-right: 15px;" (click)="cancelarVenda()" class="btn btn-danger">Cancelar Venda</button>
     <button (click)="finalizarVenda()" class="btn btn-success">Finalizar Venda</button>
   </div>
