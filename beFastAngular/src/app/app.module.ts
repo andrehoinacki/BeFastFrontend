@@ -23,9 +23,9 @@ import { CreditoComponent } from './venda/venda-credito/credito.component';
 import { VendaProdutoComponent } from './venda/venda-produto/venda-produto.component';
 import { VincularUsuarioComponent } from './admin/vincular-usuario/vincular-usuario.component';
 import { ConsultaSadoComponent } from './aluno/consulta-saldo.component';
-import { FinalizarVendaComponent } from './venda/finalizar-venda/finalizar-venda.component';
 import { ListAlunosComponent } from './responsavel/list-alunos/list-alunos.component';
 import { ListVendasComponent } from './relatorio/vendas/list-vendas.component';
+import { CreditoBoletoComponent } from './venda/credito-boleto/credito-boleto.component';
 
 @NgModule({
   declarations: [
@@ -46,16 +46,16 @@ import { ListVendasComponent } from './relatorio/vendas/list-vendas.component';
     CreditoComponent,    
     VendaProdutoComponent, 
     VincularUsuarioComponent, 
-    ConsultaSadoComponent,
-	  FinalizarVendaComponent,   
+    ConsultaSadoComponent,	     
     ListAlunosComponent,
-    ListVendasComponent   
+    ListVendasComponent,
+    CreditoBoletoComponent       
   ],
   imports: [
     BrowserModule,
     AppRoutingModule,
     FormsModule,
-    HttpClientModule
+    HttpClientModule,    
   ],
   providers: [
     {provide: HTTP_INTERCEPTORS, useClass: HttpIntercepterBasicAuthService, multi: true }

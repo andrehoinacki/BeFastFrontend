@@ -15,9 +15,9 @@ import { CreditoComponent } from './venda/venda-credito/credito.component';
 import { VendaProdutoComponent } from './venda/venda-produto/venda-produto.component';
 import { VincularUsuarioComponent } from './admin/vincular-usuario/vincular-usuario.component';
 import { ConsultaSadoComponent } from './aluno/consulta-saldo.component';
-import { FinalizarVendaComponent } from './venda/finalizar-venda/finalizar-venda.component';
 import { ListAlunosComponent } from './responsavel/list-alunos/list-alunos.component';
 import { ListVendasComponent } from './relatorio/vendas/list-vendas.component';
+import { CreditoBoletoComponent } from './venda/credito-boleto/credito-boleto.component';
 
 const routes: Routes = [
   {path:'', component:LoginComponent},
@@ -92,17 +92,17 @@ const routes: Routes = [
     data: { expectedRole: ['ROLE_ADMIN', 'ROLE_FUNCIONARIO']}, 
     component : VincularUsuarioComponent, 
     canActivate : [RouteGuardService] 
-  },
-  { 
-    path : 'venda/finalizar',
-    data: { expectedRole: ['ROLE_ADMIN', 'ROLE_FUNCIONARIO']}, 
-    component : FinalizarVendaComponent, 
-    canActivate : [RouteGuardService] 
-  },
+  },  
   { 
     path : 'relatorio/vendas',
     data: { expectedRole: ['ROLE_ADMIN']}, 
     component : ListVendasComponent, 
+    canActivate : [RouteGuardService] 
+  },
+  { 
+    path : 'venda/credito/boleto',
+    data: { expectedRole: ['ROLE_ADMIN']}, 
+    component : CreditoBoletoComponent, 
     canActivate : [RouteGuardService] 
   },
 
