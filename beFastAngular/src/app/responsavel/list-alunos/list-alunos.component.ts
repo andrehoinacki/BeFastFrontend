@@ -54,9 +54,8 @@ export class ListAlunosComponent implements OnInit {
   }
 
   consumo(id){
-    //this.actualPage = 1;
-    //this.object_filter.pageNumber = 1;
-    //this.load();
+    console.log(`update ${id}`)
+    this.router.navigate(['responsavel/historicoconsumo',id])
   }
 
   load(){

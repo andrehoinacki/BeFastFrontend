@@ -1,0 +1,27 @@
+<h1> Histórico de Consumo nos Últimos 30 Dias </h1>
+
+<div class="alert alert-success" *ngIf='message'>{{message}}</div>
+<div class="container table-responsive-sm">
+    <table class="table" [hidden]="consumos.length == 0">
+      <thead>
+        <tr>
+          <th scope="col">Data</th>
+          <th scope="col">Produtos</th>
+        </tr>
+      </thead>
+      <tbody>
+        <!--linha da tabela com as infos -->
+        <tr *ngFor="let row of consumos">
+          <td>{{row.dataVenda | date: 'dd/MM/yyyy'}}</td>
+          <td>
+            <div *ngFor="let i of row.itens">
+              <td>{{i.descricao}}   -  Quantidade {{i.quantidade}}</td>
+            </div>
+          </td>
+        </tr>
+      </tbody>
+    </table>
+    <p [hidden]="consumos.length > 0" class="no-results">Nenhum consumo registrado para esse período</p>
+    <paginator (pageChanged)="pageChanged($event)" [totalElements]="totalRecords" [pageSize]="pageSize" [actualPage]="actualPage"></paginator>
+    <button style="margin-right: 15px;" (click)="voltar()" class="btn btn-danger">Voltar</button>
+  </div>

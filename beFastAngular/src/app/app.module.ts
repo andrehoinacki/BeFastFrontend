@@ -28,6 +28,7 @@ import { ListVendasComponent } from './relatorio/vendas/list-vendas.component';
 import { CreditoBoletoComponent } from './venda/credito-boleto/credito-boleto.component';
 import { ListRecebiveisComponent } from './relatorio/recebiveis/list-recebiveis.component';
 import { UpdateRestricaoComponent } from './responsavel/update-restricao/update-restricao.component';
+import { ConsumoComponent } from './responsavel/consumo/consumo.component';
 
 @NgModule({
   declarations: [
@@ -53,7 +54,8 @@ import { UpdateRestricaoComponent } from './responsavel/update-restricao/update-
     ListVendasComponent,
     CreditoBoletoComponent,
     ListRecebiveisComponent,
-    UpdateRestricaoComponent      
+    UpdateRestricaoComponent,
+    ConsumoComponent      
   ],
   imports: [
     BrowserModule,

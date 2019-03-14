@@ -36,7 +36,7 @@
       <tbody>
         <!--linha da tabela com as infos -->
         <tr *ngFor="let row of vendas">
-          <td>{{row.dataVenda}}</td>
+          <td>{{row.dataVenda | date: 'dd/MM/yyyy'}}</td>
           <td>
             <div *ngFor="let i of row.itens">
               <td style="width: 180px;">{{i.descricao}}</td>
