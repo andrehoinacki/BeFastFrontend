@@ -42,7 +42,7 @@ export class ListAlunosComponent implements OnInit {
 
    updateRestricao(id) {
     console.log(`update ${id}`)
-    //this.router.navigate(['admin/usuario',id])
+    this.router.navigate(['responsavel/updaterestricao',id])
   }
 
   updateSaldo(id){

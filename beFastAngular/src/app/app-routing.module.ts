@@ -18,6 +18,8 @@ import { ConsultaSadoComponent } from './aluno/consulta-saldo.component';
 import { ListAlunosComponent } from './responsavel/list-alunos/list-alunos.component';
 import { ListVendasComponent } from './relatorio/vendas/list-vendas.component';
 import { CreditoBoletoComponent } from './venda/credito-boleto/credito-boleto.component';
+import { ListRecebiveisComponent } from './relatorio/recebiveis/list-recebiveis.component';
+import { UpdateRestricaoComponent } from './responsavel/update-restricao/update-restricao.component';
 
 const routes: Routes = [
   {path:'', component:LoginComponent},
@@ -42,6 +44,13 @@ const routes: Routes = [
     component : ListAlunosComponent, 
     canActivate : [RouteGuardService]
   },
+  {
+    path : 'responsavel/updaterestricao/:id',
+    data: { expectedRole: ['ROLE_RESPONSAVEL']},
+    component : UpdateRestricaoComponent, 
+    canActivate : [RouteGuardService]
+  },
+  
   { 
     path : 'todos',
     data: { expectedRole: ['ROLE_ADMIN']}, 
@@ -105,6 +114,13 @@ const routes: Routes = [
     component : CreditoBoletoComponent, 
     canActivate : [RouteGuardService] 
   },
+  { 
+    path : 'relatorio/recebiveis',
+    data: { expectedRole: ['ROLE_ADMIN']}, 
+    component : ListRecebiveisComponent, 
+    canActivate : [RouteGuardService] 
+  },
+  
 
   
   {path:'logout', component:LogoutComponent, canActivate : [RouteGuardService]},

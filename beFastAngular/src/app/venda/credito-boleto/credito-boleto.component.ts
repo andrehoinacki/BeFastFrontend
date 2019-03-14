@@ -1,5 +1,5 @@
 import { Component, OnInit, ViewChild } from '@angular/core';
-import { SimplePdfViewerComponent, SimplePDFBookmark } from 'simple-pdf-viewer';
+//import { SimplePdfViewerComponent, SimplePDFBookmark } from 'simple-pdf-viewer';
 
 @Component({
   selector: 'app-credito-boleto',

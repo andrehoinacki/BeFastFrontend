@@ -26,6 +26,8 @@ import { ConsultaSadoComponent } from './aluno/consulta-saldo.component';
 import { ListAlunosComponent } from './responsavel/list-alunos/list-alunos.component';
 import { ListVendasComponent } from './relatorio/vendas/list-vendas.component';
 import { CreditoBoletoComponent } from './venda/credito-boleto/credito-boleto.component';
+import { ListRecebiveisComponent } from './relatorio/recebiveis/list-recebiveis.component';
+import { UpdateRestricaoComponent } from './responsavel/update-restricao/update-restricao.component';
 
 @NgModule({
   declarations: [
@@ -49,7 +51,9 @@ import { CreditoBoletoComponent } from './venda/credito-boleto/credito-boleto.co
     ConsultaSadoComponent,	     
     ListAlunosComponent,
     ListVendasComponent,
-    CreditoBoletoComponent       
+    CreditoBoletoComponent,
+    ListRecebiveisComponent,
+    UpdateRestricaoComponent      
   ],
   imports: [
     BrowserModule,
