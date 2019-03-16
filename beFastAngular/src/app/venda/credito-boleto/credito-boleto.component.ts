@@ -7,11 +7,21 @@ import { Component, OnInit, ViewChild } from '@angular/core';
   styleUrls: ['./credito-boleto.component.css']
 })
 export class CreditoBoletoComponent implements OnInit {
-  pdfSrc: string = 'C:/temp/MeuBoleto.pdf';
+  hasUsuario : boolean;
+  matricula : String;
+  nomeAluno : String;
+  valorCredito : number;
   constructor() { }
 
   ngOnInit() {
+    this.hasUsuario = true;
+    this.matricula = '101890';
+    this.nomeAluno = 'Andre Luis Loureiro';
+    console.log('Teste');
   }
 
+  download() {
+    
+  }
   
 }

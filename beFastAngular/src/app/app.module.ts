@@ -29,7 +29,7 @@ import { CreditoBoletoComponent } from './venda/credito-boleto/credito-boleto.co
 import { ListRecebiveisComponent } from './relatorio/recebiveis/list-recebiveis.component';
 import { UpdateRestricaoComponent } from './responsavel/update-restricao/update-restricao.component';
 import { ConsumoComponent } from './responsavel/consumo/consumo.component';
-import { BarecodeScannerLivestreamModule } from 'ngx-barcode-scanner';
+
 
 @NgModule({
   declarations: [
@@ -63,7 +63,6 @@ import { BarecodeScannerLivestreamModule } from 'ngx-barcode-scanner';
     AppRoutingModule,
     FormsModule,
     HttpClientModule,
-    BarecodeScannerLivestreamModule,    
   ],
   providers: [
     {provide: HTTP_INTERCEPTORS, useClass: HttpIntercepterBasicAuthService, multi: true }
