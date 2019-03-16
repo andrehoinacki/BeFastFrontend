@@ -61,7 +61,7 @@ import { ConsumoComponent } from './responsavel/consumo/consumo.component';
     BrowserModule,
     AppRoutingModule,
     FormsModule,
-    HttpClientModule,    
+    HttpClientModule,        
   ],
   providers: [
     {provide: HTTP_INTERCEPTORS, useClass: HttpIntercepterBasicAuthService, multi: true }

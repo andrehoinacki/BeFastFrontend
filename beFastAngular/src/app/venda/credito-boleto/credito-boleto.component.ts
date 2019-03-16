@@ -1,5 +1,6 @@
 import { Component, OnInit, ViewChild } from '@angular/core';
-//import { SimplePdfViewerComponent, SimplePDFBookmark } from 'simple-pdf-viewer';
+
+declare var jQuery: any;
 
 @Component({
   selector: 'app-credito-boleto',
@@ -7,11 +8,18 @@ import { Component, OnInit, ViewChild } from '@angular/core';
   styleUrls: ['./credito-boleto.component.css']
 })
 export class CreditoBoletoComponent implements OnInit {
-  pdfSrc: string = 'C:/temp/MeuBoleto.pdf';
+  
   constructor() { }
-
+  
   ngOnInit() {
+    
   }
 
+  downloadPdf() {
+    // const doc = new jsPDF();
+    //doc.existsFileInVFS("MeuBoleto.pdf");
+    // doc.text('Alguma coisa', 10,10);
+    // doc.save("Teste.pdf");
+  }
   
 }
