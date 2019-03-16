@@ -1,7 +1,7 @@
 import { ActivatedRoute, Router } from '@angular/router';
 import { UsuarioService } from '../../service/admin/usuario/usuario.service';
 import { RoleService } from '../../service/admin/role/role.service';
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, ViewChild } from '@angular/core';
 import { Usuario } from '../usuario/usuario.model';
 import { Role } from '../role/role.model';
 import { RestricaoService } from 'src/app/service/admin/restricao/restricao.service';

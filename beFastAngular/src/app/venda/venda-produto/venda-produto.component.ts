@@ -26,6 +26,8 @@ export class VendaProdutoComponent implements OnInit {
 
   saldo : number = 0; 
   nomeAluno : string;
+  somaCaloria : number = 0;
+  totalCompra : number = 0;
 
   selectedFormaPgto : FormaPagamento;  
   selectedFormaPgtoNome : string;
@@ -57,8 +59,12 @@ export class VendaProdutoComponent implements OnInit {
     this.usuarioService.getByMatricula(this.usuario.matricula).subscribe(data=> {       
       if (data != null) {
           this.usuario = data;          
-          if (data.saldo != null && data.saldo.lenght > 0) {            
-            this.saldo = data.saldo;
+          if (data.saldo != null && data.saldo.lenght > 0) {
+            this.usuario.saldo.forEach(saldo => {
+              if(saldo.status != "Pendente"){
+                this.saldo = this.saldo + saldo.credito;
+              }
+            });
           } else {            
             this.saldo = 0; 
           }
@@ -68,7 +74,8 @@ export class VendaProdutoComponent implements OnInit {
     });    
   }
 
-  getProduto(){       
+  getProduto(){ 
+    this.limparMensagem();      
     this.quantidade = this.produto.quantidade;
     console.log('aqui'+this.quantidade);
     console.log(this.produto.codigo);
@@ -79,26 +86,65 @@ export class VendaProdutoComponent implements OnInit {
     } else if (this.usuario.id == null) {
       this.mensagem = 'É necessário selecionar um cliente para a venda.';
     } else {   
-      this.produtoService.get(this.produto.codigo).subscribe(data=> {       
+      this.produtoService.getByCodigo(this.produto.codigo).subscribe(data=> {       
         if (data != null) {
           console.log(data.descricao);
-          data.quantidade = this.quantidade;
-          this.itens.push(data);
-          this.limparCampos();
-        } 
+          let restrito = false;
+          if(this.usuario.restricoes != undefined
+            && this.usuario.restricoes != null
+            && this.usuario.restricoes.length > 0){
+              if(data.restricoes != undefined
+                && data.restricoes !== null
+                && data.restricoes.length > 0){
+                  this.usuario.restricoes.forEach(restricao => {
+                    data.restricoes.forEach(prodrest => {
+                      if(restricao.id == prodrest.id && restricao.nome != 'CALORICA') {
+                        restrito = true;
+                        return;
+                      }
+                      if(restricao.id == prodrest.id && restricao.nome == 'CALORICA'){
+                        this.somaCaloria = this.somaCaloria + (data.valorCalorico * this.quantidade);
+                        restrito = this.usuario.valorCalorico < this.somaCaloria;
+                        return;
+                      }
+                    });
+                  });
+                  if(restrito) {
+                    this.mensagem = 'O usuário ' + this.usuario.nome + " não pode consumir esse tipo de alimento";
+                  } else {
+                    data.quantidade = this.quantidade;
+                    this.totalCompra = this.totalCompra + (data.valor * this.quantidade);
+                    this.itens.push(data);
+                    this.limparCampos();
+                  }
+              }
+            }
+          
+          
+        } else {
+          this.mensagem = "Produto não encontrado!"
+        }
       });    
     }
   }
 
   finalizarVenda() {
-    this.venda.itens = this.itens;
-    this.venda.cliente = this.usuario;
-    this.venda.funcionario = this.usuario;
-    this.venda.dataVenda = new Date();
-    this.venda.pagamento = this.selectedFormaPgto;
-    this.vendaService.salvar(this.venda).subscribe(data=>{      
-      this.cancelarVenda();
-    });
+    this.limparMensagem();
+    if(this.selectedFormaPgtoNome == "Carteirinha") {
+      if(this.saldo < this.totalCompra) {
+        this.mensagem = "Saldo insulficiente para realizar a compra!";
+        return;
+      }
+    } else {
+      this.venda.itens = this.itens;
+      this.venda.cliente = this.usuario;
+      this.venda.funcionario = this.usuario;
+      this.venda.dataVenda = new Date();
+      this.venda.pagamento = this.selectedFormaPgto;
+      this.vendaService.salvar(this.venda).subscribe(data=>{      
+        this.cancelarVenda();
+      });
+    }
   }
 
   // Radio Change Event
@@ -107,7 +153,11 @@ export class VendaProdutoComponent implements OnInit {
     this.selectedFormaPgtoNome = item.nome;
   }
 
-  retirarProduto(index){    
+  retirarProduto(index, produtoExcluir){
+    this.totalCompra = this.totalCompra - (produtoExcluir.valor * produtoExcluir.quantidade);
+    if(this.somaCaloria > 0) {
+      this.somaCaloria = this.somaCaloria - (produtoExcluir.valorCalorico * produtoExcluir.quantidade);
+    }    
     this.itens.splice(index, 1);
   }
 
@@ -128,5 +178,10 @@ export class VendaProdutoComponent implements OnInit {
     this.venda = new Venda();        
     this.saldo = 0;
     this.produto = new Produto();
+    this.limparMensagem();
+  }
+
+  limparMensagem() {
+    this.mensagem = undefined;
   }
 }
