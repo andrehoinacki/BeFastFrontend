@@ -4,25 +4,30 @@
   <div class="alert alert-warning" *ngIf="usuarioForm.dirty && usuarioForm.invalid">Enter valid values</div>
 
   <form (ngSubmit)="!usuarioForm.invalid && saveUsuario()" #usuarioForm="ngForm">
-    <fieldset class="form-group" style="float:left; width: 50%; margin-right: 100px;">
-      <label>Nome:*</label>
-      <input type="text" #nome="ngModel" [(ngModel)]="usuario.nome" class="form-control" name="nome"
-        required="required">
-    </fieldset>
-    <fieldset class="form-group" style="float: left; width: 50%; margin-right: 100px;">
-      <label>Matricula: </label>
-      <input type="text" #nome="ngModel" [(ngModel)]="usuario.matricula" class="form-control" name="matricula">
-    </fieldset>
-    <fieldset class="form-group">
-      <label>Login:*</label>
-      <input type="text" #username="ngModel" [(ngModel)]="usuario.username" class="form-control" name="username"
-        required="required">
-    </fieldset>
-    <fieldset class="form-group">
-      <label>Senha:*</label>
-      <input type="password" #password="ngModel" [(ngModel)]="usuario.password" class="form-control" name="password"
-        required="required">
-    </fieldset>
+    <div class="row">
+      <fieldset class="col-md-6">
+        <label>Nome:*</label>
+        <input type="text" #nome="ngModel" [(ngModel)]="usuario.nome" class="form-control" name="nome"
+          required="required">
+      </fieldset>
+      <fieldset class="col-md-6">
+        <label>Matricula: </label>
+        <input type="text" #nome="ngModel" [(ngModel)]="usuario.matricula" class="form-control" name="matricula">
+      </fieldset>
+    </div>
+    <div class="row">
+      <fieldset class="col-md-6">
+        <label>Login:*</label>
+        <input type="text" #username="ngModel" [(ngModel)]="usuario.username" class="form-control" name="username"
+          required="required">
+      </fieldset>
+      <fieldset class="col-md-6">
+        <label>Senha:*</label>
+        <input type="password" #password="ngModel" [(ngModel)]="usuario.password" class="form-control" name="password"
+          required="required">
+      </fieldset>
+    </div>
+
     <div class="row">
       <div class="col-md-4">
         <label>Role:*</label>
@@ -49,6 +54,8 @@
     <div class="row" style="margin-top: 40px;">
       <div class="col-md-12">
         <p>Campos marcados com (*) são obrigatórios!</p>
+      </div>
+      <div class="col-md-12">
         <button style="margin-right: 15px;" (click)="cancelar()" class="btn btn-danger">Cancelar</button>
         <button type="submit" class="btn btn-success">Salvar</button>
       </div>

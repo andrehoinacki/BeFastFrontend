@@ -8,18 +8,21 @@ declare var jQuery: any;
   styleUrls: ['./credito-boleto.component.css']
 })
 export class CreditoBoletoComponent implements OnInit {
-  
+  hasUsuario : boolean;
+  matricula : String;
+  nomeAluno : String;
+  valorCredito : number;
   constructor() { }
   
   ngOnInit() {
-    
+    this.hasUsuario = true;
+    this.matricula = '101890';
+    this.nomeAluno = 'Andre Luis Loureiro';
+    console.log('Teste');
   }
 
-  downloadPdf() {
-    // const doc = new jsPDF();
-    //doc.existsFileInVFS("MeuBoleto.pdf");
-    // doc.text('Alguma coisa', 10,10);
-    // doc.save("Teste.pdf");
+  download() {
+    
   }
   
 }

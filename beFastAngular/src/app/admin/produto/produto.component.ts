@@ -103,9 +103,13 @@ export class ProdutoComponent implements OnInit {
     }
   }
 
-    // Radio Change Event
-    onItemChangeCategoria(item){
-      this.selectedCategoria = item;
-      this.selectedCategoriaNome = item.nome;
-    }
+  // Radio Change Event
+  onItemChangeCategoria(item){
+    this.selectedCategoria = item;
+    this.selectedCategoriaNome = item.nome;
+  }
+
+  cancelar(){
+    this.router.navigate(['admin/produto']);
+  }
 }

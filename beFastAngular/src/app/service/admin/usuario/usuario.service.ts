@@ -9,7 +9,6 @@ import { map } from 'rxjs/operators';
   providedIn: 'root'
 })
 export class UsuarioService {
-
   constructor(
     private http:HttpClient
   ) { }
@@ -40,6 +39,14 @@ salvar(data : Usuario) : Observable <any> {
 
   get(id) : Observable <any> {
     return this.http.get(`${API_URL}/admin/usuario/${id}`).pipe(
+        map(
+            data => data
+        )
+    );
+  }
+
+  getByUsername(username) : Observable <any> {
+    return this.http.get(`${API_URL}/admin/usuario/byusername/${username}`).pipe(
         map(
             data => data
         )

@@ -6,20 +6,18 @@
   <form (ngSubmit)="!vendaClienteForm.invalid && getUsuario()" #vendaClienteForm="ngForm">
     <div class="row">
       <div class="col-md-2">
-        <label>Matrícula</label>
+        <label>Matrícula:*</label>
       </div>
       <div class="col-md-4">
         <input type="text" #nome="ngModel" [(ngModel)]="usuario.matricula" class="form-control" name="nome"
           required="required">
       </div>
-      <div class="col-md-2">
+      <div class="col-md-2" *ngIf="hasUsuario">
+          <label>Usuário: {{nomeAluno}}</label>
+        </div>
+      <div class="col-md-2" *ngIf="hasUsuario">
         <label>Saldo: R${{saldo}},00</label>
       </div>
-    </div>
-    <div class="row">
-      <fieldset class="col-md-12" *ngIf="hasUsuario">
-        <label>Usuário: {{nomeAluno}}</label>
-      </fieldset>
     </div>
   </form>
 </div>
@@ -27,17 +25,17 @@
   <form (ngSubmit)="!vendaItemForm.invalid && getProduto()" #vendaItemForm="ngForm">
     <div class="row" style="margin-top: 10px;">
       <div class="col-md-2">
-        <label>Produto</label>
+        <label>Produto:*</label>
       </div>
       <div class="col-md-4">
         <input type="text" #codigo="ngModel" [(ngModel)]="produto.codigo" class="form-control" name="codigo"
           required="required">
       </div>
       <div class="col-md-2">
-        <label>Quantidade</label>
+        <label>Quantidade:*</label>
       </div>
       <div class="col-md-2">
-        <input type="text" #quantidade="ngModel" [(ngModel)]="produto.quantidade" class="form-control" name="quantidade"
+        <input type="number" #quantidade="ngModel" [(ngModel)]="produto.quantidade" class="form-control" name="quantidade"
           required="required">
       </div>
       <div class="col-md-2">
@@ -53,10 +51,9 @@
       <tr>
         <th scope="col">Categoria</th>
         <th scope="col">Produto</th>
-        <th scope="col">Código</th>
         <th scope="col">Quantidade</th>
         <th scope="col">Valor</th>
-        <th scope="col">Restrições</th>
+        <th scope="col">Subtotal</th>
         <th></th>
         <th></th>
       </tr>
@@ -64,26 +61,24 @@
     <tbody>
       <!--linha da tabela com as infos -->
       <tr *ngFor="let row of itens; let i = index">
-        <td>{{row.categoria.nome}}</td>
-        <td>{{row.descricao}}</td>
-        <td>{{row.codigo}}</td>
+        <td>{{row.produto.categoria.nome}}</td>
+        <td>{{row.produto.descricao}}</td>
         <td>{{row.quantidade}}</td>
         <td>{{row.valor}}</td>
-        <td>
-          <div *ngFor="let rest of row.restricoes">
-            {{rest.nome}}
-          </div>
-        </td>
-        <td><button (click)="retirarProduto(i)" class="btn btn-warning">Delete</button></td>
+        <td>{{row.quantidade * row.valor}}</td>
+        <td><button (click)="retirarProduto(i, row)" class="btn btn-warning">Delete</button></td>
       </tr>
     </tbody>
   </table>
-  <p [hidden]="itens.length > 0" class="no-results">Nenhum produto inserido</p>
-  <paginator (pageChanged)="pageChanged($event)" [totalElements]="totalRecords" [pageSize]="pageSize"
-    [actualPage]="actualPage"></paginator>
 
+  <p [hidden]="itens.length > 0" class="no-results">Nenhum produto inserido</p>
+  <paginator (pageChanged)="pageChanged($event)" [totalElements]="toalRecords" [pageSize]="pageSize"
+    [actualPage]="actualPage"></paginator>
   <div class="row">    
     <div class="col-md-12">
+        <div class="col-md-2" style="float:right;">
+          <label>Total: {{totalCompra}}</label>
+        </div>
       <label>Forma de Pagamento:*</label>
       <div *ngFor="let fp of listFormaPgto">
         <input type="radio" [(ngModel)]="selectedFormaPgtoNome" name="list_name" value="{{fp.nome}}"
@@ -92,8 +87,10 @@
       </div>
     </div>    
   </div>
-
   <div class="row" style="margin-top: 20px;">
+      <p>Campos marcados com (*) são obrigatórios!</p>
+  </div>
+  <div class="row">
     <button style="margin-right: 15px;" (click)="cancelarVenda()" class="btn btn-danger">Cancelar Venda</button>
     <button (click)="finalizarVenda()" class="btn btn-success">Finalizar Venda</button>
   </div>

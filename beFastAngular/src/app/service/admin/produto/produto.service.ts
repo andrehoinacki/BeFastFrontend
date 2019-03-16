@@ -46,6 +46,14 @@ get(id) : Observable <any> {
   );
 }
 
+getByCodigo(codigo) : Observable <any> {
+  return this.http.get(`${API_URL}/admin/produto/bycodigo/${codigo}`).pipe(
+      map(
+          data => data
+      )
+  );
+}
+
   deleteProduto(id){
     return this.http.delete(`${API_URL}/admin/produto/${id}`);
   }
