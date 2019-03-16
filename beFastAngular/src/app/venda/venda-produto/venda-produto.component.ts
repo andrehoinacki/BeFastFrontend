@@ -8,6 +8,7 @@ import { ProdutoService } from 'src/app/service/admin/produto/produto.service';
 import { VendaService } from 'src/app/service/venda/venda.service';
 import { FormaPagamento } from '../forma-pagamento/formapgto.model';
 import { FormaPagamentoService } from 'src/app/service/util/forma-pagamento/formapgto.service';
+import { ItemVenda } from './item-venda.model';
 
 @Component({
   selector: 'app-venda-produto',
@@ -17,11 +18,12 @@ import { FormaPagamentoService } from 'src/app/service/util/forma-pagamento/form
 export class VendaProdutoComponent implements OnInit {  
   venda: Venda;
   produto: Produto;
-  itens : Array<any> = [];
+  itens : Array<ItemVenda> = [];
   quantidade : number;
 
   mensagem : string;  
-  usuario : Usuario;  
+  usuario : Usuario;
+  vendedor : Usuario;  
   hasUsuario : boolean = false;
 
   saldo : number = 0; 
@@ -46,6 +48,7 @@ export class VendaProdutoComponent implements OnInit {
     this.venda = new Venda();
     this.produto = new Produto();
     this.usuario = new Usuario();
+    this.getVendedor();
     this.loadFormasPgto();
   }
 
@@ -53,6 +56,15 @@ export class VendaProdutoComponent implements OnInit {
     this.formapgtoService.list().subscribe(data=>{
       this.listFormaPgto=data;      
     });
+  }
+
+  getVendedor(){   
+    let vendedorAux = JSON.parse(sessionStorage.getItem('usuarioLogado'))
+    this.usuarioService.getByUsername(vendedorAux.username).subscribe(data=> {       
+      if (data != null) {
+        this.vendedor = data;
+      } 
+    });    
   }
 
   getUsuario(){                
@@ -112,9 +124,13 @@ export class VendaProdutoComponent implements OnInit {
                   if(restrito) {
                     this.mensagem = 'O usuário ' + this.usuario.nome + " não pode consumir esse tipo de alimento";
                   } else {
-                    data.quantidade = this.quantidade;
+                    let item = new ItemVenda();
+                    item.produto = data;
+                    item.quantidade = (this.quantidade);
+                    item.valor = data.valor;
+
                     this.totalCompra = this.totalCompra + (data.valor * this.quantidade);
-                    this.itens.push(data);
+                    this.itens.push(item);
                     this.limparCampos();
                   }
               }
@@ -138,7 +154,7 @@ export class VendaProdutoComponent implements OnInit {
     } else {
       this.venda.itens = this.itens;
       this.venda.cliente = this.usuario;
-      this.venda.funcionario = this.usuario;
+      this.venda.funcionario = this.vendedor;
       this.venda.dataVenda = new Date();
       this.venda.pagamento = this.selectedFormaPgto;
       this.vendaService.salvar(this.venda).subscribe(data=>{      

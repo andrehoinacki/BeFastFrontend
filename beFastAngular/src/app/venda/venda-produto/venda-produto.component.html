@@ -61,8 +61,8 @@
     <tbody>
       <!--linha da tabela com as infos -->
       <tr *ngFor="let row of itens; let i = index">
-        <td>{{row.categoria.nome}}</td>
-        <td>{{row.descricao}}</td>
+        <td>{{row.produto.categoria.nome}}</td>
+        <td>{{row.produto.descricao}}</td>
         <td>{{row.quantidade}}</td>
         <td>{{row.valor}}</td>
         <td>{{row.quantidade * row.valor}}</td>
@@ -72,12 +72,12 @@
   </table>
 
   <p [hidden]="itens.length > 0" class="no-results">Nenhum produto inserido</p>
-  <paginator (pageChanged)="pageChanged($event)" [totalElements]="totalRecords" [pageSize]="pageSize"
+  <paginator (pageChanged)="pageChanged($event)" [totalElements]="toalRecords" [pageSize]="pageSize"
     [actualPage]="actualPage"></paginator>
   <div class="row">    
     <div class="col-md-12">
         <div class="col-md-2" style="float:right;">
-          <label>Total: {{totalCompra}},00</label>
+          <label>Total: {{totalCompra}}</label>
         </div>
       <label>Forma de Pagamento:*</label>
       <div *ngFor="let fp of listFormaPgto">
