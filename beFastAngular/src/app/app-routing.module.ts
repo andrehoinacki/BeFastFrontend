@@ -115,8 +115,8 @@ const routes: Routes = [
     canActivate : [RouteGuardService] 
   },
   { 
-    path : 'venda/credito/boleto',
-    data: { expectedRole: ['ROLE_ADMIN']}, 
+    path : 'venda/credito/boleto/:id',
+    data: { expectedRole: ['ROLE_RESPONSAVEL']}, 
     component : CreditoBoletoComponent, 
     canActivate : [RouteGuardService] 
   },

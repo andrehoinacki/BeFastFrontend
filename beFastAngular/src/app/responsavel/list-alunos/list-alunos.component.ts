@@ -46,7 +46,7 @@ export class ListAlunosComponent implements OnInit {
   }
 
   updateSaldo(id){
-   // this.router.navigate(['admin/usuario/', id]);
+    this.router.navigate(['venda/credito/boleto/', id]);
   }
 
   creditos(id) {    

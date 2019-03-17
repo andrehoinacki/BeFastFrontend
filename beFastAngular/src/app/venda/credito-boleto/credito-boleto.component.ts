@@ -1,28 +1,61 @@
 import { Component, OnInit, ViewChild } from '@angular/core';
+import {saveAs} from 'file-saver';
+import { FileService } from '../file.service';
+import { ActivatedRoute } from '@angular/router';
+import { Usuario } from 'src/app/admin/usuario/usuario.model';
+import { UsuarioService } from 'src/app/service/admin/usuario/usuario.service';
 
-declare var jQuery: any;
+// const MIME_TYPES = {
+//   pdf: 'application/pdf',
+//   xls: 'application/vnd.ms-excel',
+//   xlsx: 'application/vnd.openxmlformats-officedocument.spreadsheetxml.sheet'
+// }
 
 @Component({
   selector: 'app-credito-boleto',
   templateUrl: './credito-boleto.component.html',
-  styleUrls: ['./credito-boleto.component.css']
+  styleUrls: ['./credito-boleto.component.css'],
+  providers:[FileService]
 })
 export class CreditoBoletoComponent implements OnInit {
   hasUsuario : boolean;
   matricula : String;
   nomeAluno : String;
   valorCredito : number;
-  constructor() { }
+  id:number;
+  usuario: Usuario;
   
+  constructor(
+    private service:FileService,
+    private route: ActivatedRoute,
+    private usuarioService: UsuarioService,
+  ) { }
+     
   ngOnInit() {
-    this.hasUsuario = true;
-    this.matricula = '101890';
-    this.nomeAluno = 'Andre Luis Loureiro';
-    console.log('Teste');
+    this.usuario = new Usuario();
+    this.id = this.route.snapshot.params['id'];        
+    this.route.paramMap.subscribe(params => {
+      if(this.id != -1){
+        this.usuario.id = this.id;
+        this.get();
+      }
+    });   
   }
 
-  download() {
-    
+  downloadFile() {        
+    this.service.download(this.matricula, this.valorCredito)
+    .subscribe(data => {            
+      saveAs(new Blob([data], {type: 'application/pdf'}), 'boleto_download.pdf');
+    })
   }
-  
+
+  get(){
+    this.usuarioService.get(this.id).subscribe(data=>{      
+      this.usuario = data;  
+      this.hasUsuario = true;
+      this.matricula = data.matricula;
+      this.nomeAluno = data.nome;      
+    });    
+  }
+ 
 }
