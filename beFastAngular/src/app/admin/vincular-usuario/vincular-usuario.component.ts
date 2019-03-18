@@ -44,7 +44,7 @@ export class VincularUsuarioComponent implements OnInit {
     this.usuarioService.get(this.id).subscribe(data=>{      
       this.usuario = data; 
       this.usuarios = data.usuarios;
-      if (data.role.nome == 'ROLE_RESPOSAVEL') {
+      if (data.role.nome == 'ROLE_RESPONSAVEL') {
         this.isResponsavel = false;
       }     
       console.log(data.role.nome + this.isResponsavel);

@@ -29,6 +29,7 @@ import { CreditoBoletoComponent } from './venda/credito-boleto/credito-boleto.co
 import { ListRecebiveisComponent } from './relatorio/recebiveis/list-recebiveis.component';
 import { UpdateRestricaoComponent } from './responsavel/update-restricao/update-restricao.component';
 import { ConsumoComponent } from './responsavel/consumo/consumo.component';
+import { RetornoBancoComponent } from './venda/retorno-banco/retorno-banco.component';
 
 
 @NgModule({
@@ -56,7 +57,8 @@ import { ConsumoComponent } from './responsavel/consumo/consumo.component';
     CreditoBoletoComponent,
     ListRecebiveisComponent,
     UpdateRestricaoComponent,
-    ConsumoComponent      
+    ConsumoComponent,
+    RetornoBancoComponent      
   ],
   imports: [
     BrowserModule,
