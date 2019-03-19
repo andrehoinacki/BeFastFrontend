@@ -14,7 +14,8 @@ export class VendaService {
     private http:HttpClient
   ) { }
 
-  salvar(data : Venda) : Observable <any> {    
+  salvar(data : Venda) : Observable <any> {  
+    console.log(data.total);
     return this.http.post(`${API_URL}/venda/novo`,data).pipe(
         map(
             data => data

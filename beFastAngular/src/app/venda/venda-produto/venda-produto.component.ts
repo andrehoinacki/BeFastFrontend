@@ -121,19 +121,20 @@ export class VendaProdutoComponent implements OnInit {
                       }
                     });
                   });
-                  if(restrito) {
-                    this.mensagem = 'O usuário ' + this.usuario.nome + " não pode consumir esse tipo de alimento";
-                  } else {
-                    let item = new ItemVenda();
-                    item.produto = data;
-                    item.quantidade = (this.quantidade);
-                    item.valor = data.valor;
-
-                    this.totalCompra = this.totalCompra + (data.valor * this.quantidade);
-                    this.itens.push(item);
-                    this.limparCampos();
-                  }
               }
+              if(restrito) {
+                this.mensagem = 'O usuário ' + this.usuario.nome + " não pode consumir esse tipo de alimento";
+              } else {
+                let item = new ItemVenda();
+                item.produto = data;
+                item.quantidade = (this.quantidade);
+                item.valorItem = data.valor;
+
+                this.totalCompra = this.totalCompra + (data.valor * this.quantidade);
+                this.itens.push(item);
+                this.limparCampos();
+              }
+              
             }
           
           
@@ -157,6 +158,7 @@ export class VendaProdutoComponent implements OnInit {
       this.venda.funcionario = this.vendedor;
       this.venda.dataVenda = new Date();
       this.venda.pagamento = this.selectedFormaPgto;
+      this.venda.total = this.totalCompra;
       this.vendaService.salvar(this.venda).subscribe(data=>{      
         this.cancelarVenda();
       });

@@ -4,5 +4,5 @@ export class ItemVenda {
     public id : number;
     public produto : Produto;        
     public quantidade : number;
-    public valor : number;
+    public valorItem : number;
   }

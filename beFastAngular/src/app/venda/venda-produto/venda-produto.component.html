@@ -64,8 +64,8 @@
         <td>{{row.produto.categoria.nome}}</td>
         <td>{{row.produto.descricao}}</td>
         <td>{{row.quantidade}}</td>
-        <td>{{row.valor}}</td>
-        <td>{{row.quantidade * row.valor}}</td>
+        <td>{{row.valorItem}}</td>
+        <td>{{row.quantidade * row.valorItem}}</td>
         <td><button (click)="retirarProduto(i, row)" class="btn btn-warning">Delete</button></td>
       </tr>
     </tbody>
