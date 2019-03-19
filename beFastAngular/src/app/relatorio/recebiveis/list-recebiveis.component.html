@@ -14,11 +14,11 @@
         <!--linha da tabela com as infos -->
         <tr *ngFor="let row of recebiveis">
           <td>{{row.usuario}}</td>
-          <td>{{row.saldo}},00</td>
+          <td>{{formatReal(row.saldo)}}</td>
         </tr>
       </tbody>
     </table>
-    <p>Saldo Total = R$ {{total}},00</p>
+    <p>Saldo Total = R$ {{formatReal(total)}}</p>
     <p [hidden]="recebiveis.length > 0" class="no-results">Nenhum crédito encontrado</p>
     <paginator (pageChanged)="pageChanged($event)" [totalElements]="totalRecords" [pageSize]="pageSize" [actualPage]="actualPage"></paginator>
 </div>

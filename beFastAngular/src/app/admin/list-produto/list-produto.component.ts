@@ -72,4 +72,20 @@ export class ListProdutoComponent implements OnInit {
       this.totalRecords = data.totalRecords;
     });
   }
+
+  formatReal( int ) {
+    if(int == null) {
+      return "0,00"
+    }   
+    var tmp = int+'';
+    tmp = tmp.replace(".", ",");
+    if(tmp.length <= 2) {
+      tmp = tmp.concat(",00");
+    }
+    else if( tmp.length == 4 || tmp.length == 3 ) {
+      tmp = tmp.concat("0");
+    }    
+
+    return tmp;
+  }
 }

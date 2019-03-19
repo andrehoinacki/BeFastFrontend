@@ -48,13 +48,13 @@
           <td>
             <div *ngFor="let i of row.itens">
               <td style="width: 180px; border-top: 0px;">{{i.produto.descricao}}</td>
-              <td style="width: 130px;" class="itenscompra">{{i.valorItem}}</td>
+              <td style="width: 130px;" class="itenscompra">{{formatReal(i.valorItem)}}</td>
               <td style="width: 90px;" class="itenscompra">{{i.quantidade}}</td> 
-              <td style="width: 100px;" class="itenscompra">{{i.quantidade * i.valorItem}}</td> 
+              <td style="width: 100px;" class="itenscompra">{{formatReal(i.quantidade * i.valorItem)}}</td> 
             </div>
           </td>
           <td>{{row.pagamento.nome}}</td>
-          <td>{{row.total}}</td>
+          <td>{{formatReal(row.total)}}</td>
         </tr>
       </tbody>
     </table>

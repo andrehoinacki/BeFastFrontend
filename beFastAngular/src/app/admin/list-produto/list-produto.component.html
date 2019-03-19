@@ -22,7 +22,7 @@
           <td>{{row.codigo}}</td>
           <td>{{row.descricao}}</td>
           <td>{{row.quantidade}}</td>
-          <td>{{row.valor}}</td>
+          <td>{{formatReal(row.valor)}}</td>
           <td>
             <div *ngFor="let rest of row.restricoes">
                 {{rest.nome}}

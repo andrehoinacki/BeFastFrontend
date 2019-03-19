@@ -4,9 +4,9 @@
   <form #creditoForm="ngForm">
     <fieldset class="form-group" style="width: 100%; margin-right: 10px;"> 
       <H1>Saldo disponível</H1>
-      <H1>R${{saldoAtual}},00</H1>
+      <H1>R${{formatReal(saldoAtual)}}</H1>
       <H1>Saldo pendente</H1>
-      <H1>R${{saldoPendente}},00</H1>
+      <H1>R${{formatReal(saldoPendente)}}</H1>
     </fieldset>
   </form>  
 </div>

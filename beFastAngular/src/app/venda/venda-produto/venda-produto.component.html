@@ -16,7 +16,7 @@
           <label>Usuário: {{nomeAluno}}</label>
         </div>
       <div class="col-md-2" *ngIf="hasUsuario">
-        <label>Saldo: R${{saldo}},00</label>
+        <label>Saldo: R${{formatReal(saldo)}}</label>
       </div>
     </div>
   </form>
@@ -64,8 +64,8 @@
         <td>{{row.produto.categoria.nome}}</td>
         <td>{{row.produto.descricao}}</td>
         <td>{{row.quantidade}}</td>
-        <td>{{row.valorItem}}</td>
-        <td>{{row.quantidade * row.valorItem}}</td>
+        <td>{{formatReal(row.valorItem)}}</td>
+        <td>{{formatReal(row.quantidade * row.valorItem)}}</td>
         <td><button (click)="retirarProduto(i, row)" class="btn btn-warning">Delete</button></td>
       </tr>
     </tbody>
@@ -77,7 +77,7 @@
   <div class="row">    
     <div class="col-md-12">
         <div class="col-md-2" style="float:right;">
-          <label>Total: {{totalCompra}}</label>
+          <label>Total: {{formatReal(totalCompra)}}</label>
         </div>
       <label>Forma de Pagamento:*</label>
       <div *ngFor="let fp of listFormaPgto">

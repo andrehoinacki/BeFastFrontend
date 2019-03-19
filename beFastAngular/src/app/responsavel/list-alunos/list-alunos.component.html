@@ -26,10 +26,10 @@
                 {{rest.nome}}
             </div>
           </td>
-          <td>{{saldoAtual}}</td>
-          <td>{{saldoPendente}}</td>
+          <td>{{row.saldoAtual}}</td>
+          <td>{{row.saldoPendente}}</td>
           <td><button (click)="updateRestricao(row.id)" class="btn btn-warning">Alterar Restrições</button></td>
-          <td><button (click)="updateSaldo(row.id)" class="btn btn-success">Comprar Crédito</button></td>
+          <td><button (click)="updateSaldo(row.id)" class="btn btn-success" [disabled]="row.saldoPendente > 0">Comprar Crédito</button></td>
           <td><button (click)="consumo(row.id)" class="btn btn-primary">Histórico Consumo</button></td>
           <td><button (click)="creditos(row.id)" class="btn btn-info">Histórico Crédito</button></td>
         </tr>

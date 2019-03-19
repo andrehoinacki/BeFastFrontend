@@ -6,7 +6,12 @@
       <thead>
         <tr>
           <th scope="col">Data</th>
-          <th scope="col">Produtos</th>
+          <th scope="col">
+            <div>
+              <th scope="col" style="width: 200px;" class="itens">Produto</th>
+              <th scope="col" style="width: 100px;" class="itens">Quantidade</th>
+            </div> 
+          </th>
         </tr>
       </thead>
       <tbody>
@@ -15,7 +20,8 @@
           <td>{{row.dataVenda | date: 'dd/MM/yyyy'}}</td>
           <td>
             <div *ngFor="let i of row.itens">
-              <td>{{i.descricao}}   -  Quantidade {{i.quantidade}}</td>
+              <td style="width: 200px; border-top: 0px;">{{i.produto.descricao}}</td>
+              <td style="width: 100px;" class="itenscompra">{{i.quantidade}}</td>
             </div>
           </td>
         </tr>

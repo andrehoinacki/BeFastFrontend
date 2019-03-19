@@ -62,7 +62,36 @@ export class ListAlunosComponent implements OnInit {
     const filtro = Object.assign(this.object_filter);
     this.usuarioService.list(filtro).subscribe(data=>{
       this.usuarios=data['list'][0].usuarios;
+      this.usuarios.forEach(user => {
+        user['saldoAtual'] = 0;
+        user['saldoPendente'] = 0;
+        user.saldo.forEach(saldo => {
+          if(saldo.status == "Creditado") {
+            user['saldoAtual'] += saldo.credito;
+          } else {
+            user['saldoPendente'] += saldo.credito;
+          }
+        });
+        user['saldoAtual'] = this.formatReal(user['saldoAtual']);
+        user['saldoPendente'] = this.formatReal(user['saldoPendente']);
+      });
       this.totalRecords = data.totalRecords;
     });
+  }
+
+  formatReal( int ) {
+    if(int == null) {
+      return "0,00"
+    }   
+    var tmp = int+'';
+    tmp = tmp.replace(".", ",");
+    if(tmp.length <= 2) {
+      tmp = tmp.concat(",00");
+    }
+    else if( tmp.length == 4 ) {
+      tmp = tmp.concat("0");
+    }    
+
+    return tmp;
   }
 }
