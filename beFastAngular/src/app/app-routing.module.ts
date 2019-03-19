@@ -21,6 +21,7 @@ import { CreditoBoletoComponent } from './venda/credito-boleto/credito-boleto.co
 import { ListRecebiveisComponent } from './relatorio/recebiveis/list-recebiveis.component';
 import { UpdateRestricaoComponent } from './responsavel/update-restricao/update-restricao.component';
 import { ConsumoComponent } from './responsavel/consumo/consumo.component';
+import { RetornoBancoComponent } from './venda/retorno-banco/retorno-banco.component';
 
 const routes: Routes = [
   {path:'', component:LoginComponent},
@@ -124,6 +125,12 @@ const routes: Routes = [
     path : 'relatorio/recebiveis',
     data: { expectedRole: ['ROLE_ADMIN']}, 
     component : ListRecebiveisComponent, 
+    canActivate : [RouteGuardService] 
+  },
+  { 
+    path : 'vendas/boleto/retorno',
+    data: { expectedRole: ['ROLE_ADMIN', 'ROLE_FUNCIONARIO']},
+    component : RetornoBancoComponent, 
     canActivate : [RouteGuardService] 
   },
   
