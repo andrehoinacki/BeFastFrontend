@@ -32,7 +32,7 @@ export class AutenticacaoService {
 
   isFuncionario() {
     let usuario = JSON.parse(sessionStorage.getItem('usuarioLogado'));
-    return !(usuario !== null && usuario.role === 'ROLE_ALUNO');
+    return !(usuario !== null && (usuario.role === 'ROLE_ALUNO' || usuario.role === "ROLE_RESPONSAVEL"));
   }
 
   logout(){

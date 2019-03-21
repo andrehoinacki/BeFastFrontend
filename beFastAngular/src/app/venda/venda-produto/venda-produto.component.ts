@@ -56,7 +56,13 @@ export class VendaProdutoComponent implements OnInit {
 
   loadFormasPgto(){
     this.formapgtoService.list().subscribe(data=>{
-      this.listFormaPgto=data;      
+      this.listFormaPgto=data; 
+      this.listFormaPgto.forEach(fpgto => {
+        const index3 = this.listFormaPgto.findIndex(x3 => x3.nome=="Boleto");
+        if (index3 > -1){
+          this.listFormaPgto.splice(index3, 1);
+        }
+      });     
     });
   }
 

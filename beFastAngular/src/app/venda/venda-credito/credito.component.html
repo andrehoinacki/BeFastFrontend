@@ -18,7 +18,7 @@
                 name="valor" required="required" >
     </fieldset>
     <fieldset class="form-group" style="float:left; width: 100%; margin-right: 10px;" *ngIf="hasUsuario"> 
-      <label>{{usuario.nome}}, seu saldo atual é de R${{saldoAtual}},00</label>
+      <label>{{usuario.nome}}, seu saldo atual é de R$ {{formatReal(saldoAtual)}}</label>
     </fieldset>
     <fieldset class="form-group" style="float:left; width: 100%; margin-right: 100px;">
         <label>Forma de Pagamento:*</label>

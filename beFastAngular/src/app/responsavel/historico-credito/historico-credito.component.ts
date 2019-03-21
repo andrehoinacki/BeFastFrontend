@@ -1,12 +1,8 @@
 import { Component, OnInit } from '@angular/core';
 import { Router, ActivatedRoute } from '@angular/router';
-import { VendasService } from 'src/app/service/relatorio/vendas/vendas.service';
-import { Venda } from 'src/app/venda/venda-produto/venda.model';
-import { VendaFilter } from 'src/app/relatorio/vendas/vendas.filter';
 import { SaldoFilter } from 'src/app/util/saldo/saldo.filter';
 import { Saldo } from 'src/app/util/saldo/saldo.model';
 import { UsuarioService } from 'src/app/service/admin/usuario/usuario.service';
-import { elementEnd } from '@angular/core/src/render3';
 
 @Component({
   selector: 'app-historico-credito',

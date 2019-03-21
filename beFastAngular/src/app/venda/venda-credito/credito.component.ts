@@ -105,4 +105,20 @@ export class CreditoComponent implements OnInit {
       this.selectedFormaPgto = item;
       this.selectedFormaPgtoNome = item.nome;
     }
+
+    formatReal( int ) {
+      if(int == null) {
+        return "0,00"
+      }   
+      var tmp = int+'';
+      tmp = tmp.replace(".", ",");
+      if(tmp.length <= 2) {
+        tmp = tmp.concat(",00");
+      }
+      else if( tmp.length == 4 || tmp.length == 3 ) {
+        tmp = tmp.concat("0");
+      }    
+  
+      return tmp;
+    }
 }
