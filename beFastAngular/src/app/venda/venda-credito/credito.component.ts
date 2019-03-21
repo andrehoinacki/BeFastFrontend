@@ -80,6 +80,7 @@ export class CreditoComponent implements OnInit {
     }
 
     this.saldo.status = "Creditado";
+    this.saldo.data = new Date();
     this.usuario.saldo.push(this.saldo);
     this.usuarioService.salvar(this.usuario).subscribe(data=>{
     this.limpar();

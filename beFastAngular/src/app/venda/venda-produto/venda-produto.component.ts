@@ -167,6 +167,7 @@ export class VendaProdutoComponent implements OnInit {
       } else {
         // ATUALIZA SALDO
         let saldo = new Saldo();
+        saldo.data = new Date();
         saldo.status = "Creditado";
         saldo.credito = -this.totalCompra;
         this.usuario.saldo.push(saldo);
