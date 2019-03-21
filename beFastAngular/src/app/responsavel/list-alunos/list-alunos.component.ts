@@ -50,7 +50,7 @@ export class ListAlunosComponent implements OnInit {
   }
 
   creditos(id) {    
-    //this.router.navigate(['admin/usuario/vincular',id])
+    this.router.navigate(['responsavel/historicocredito',id])
   }
 
   consumo(id){

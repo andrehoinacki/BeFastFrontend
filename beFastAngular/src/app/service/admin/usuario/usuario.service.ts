@@ -9,7 +9,7 @@ import { map } from 'rxjs/operators';
   providedIn: 'root'
 })
 export class UsuarioService {
-  constructor(
+    constructor(
     private http:HttpClient
   ) { }
 
@@ -67,5 +67,13 @@ salvar(data : Usuario) : Observable <any> {
 
   retrieveUsuario(username, id){
     return this.http.get<Usuario>(`${TODO_JPA_API_URL}/users/${username}/usuario/${id}`);
+  }
+
+  listSaldoByUsuario(filtro: any): Observable <any> {
+    return this.http.post(`${API_URL}/responsavel/saldo/list`,filtro).pipe(
+      map(
+          data => data
+      )
+    );
   }
 }

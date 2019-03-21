@@ -1,0 +1,26 @@
+<h1> Histórico de Crédito nos Últimos 30 Dias </h1>
+
+<div class="alert alert-success" *ngIf='message'>{{message}}</div>
+<div class="container table-responsive-sm">
+    <p>Saldo disponíel: {{formatReal(saldoDisponivel)}}</p>
+    <table class="table" [hidden]="creditos.length == 0">
+      <thead>
+        <tr>
+          <th scope="col">Data</th>
+          <th scope="col">Situação</th>
+          <th scope="col">Valor</th>
+        </tr>
+      </thead>
+      <tbody>
+        <!--linha da tabela com as infos -->
+        <tr *ngFor="let row of creditos">
+          <td>{{row.data | date: 'dd/MM/yyyy'}}</td>
+          <td>{{row.status}}</td>
+          <td>{{row.credito}}</td>
+        </tr>
+      </tbody>
+    </table>
+    <p [hidden]="creditos.length > 0" class="no-results">Nenhum crédito registrado para esse período</p>
+    <paginator (pageChanged)="pageChanged($event)" [totalElements]="totalRecords" [pageSize]="pageSize" [actualPage]="actualPage"></paginator>
+    <button style="margin-right: 15px;" (click)="voltar()" class="btn btn-danger">Voltar</button>
+  </div>

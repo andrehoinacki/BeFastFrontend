@@ -22,6 +22,7 @@ import { ListRecebiveisComponent } from './relatorio/recebiveis/list-recebiveis.
 import { UpdateRestricaoComponent } from './responsavel/update-restricao/update-restricao.component';
 import { ConsumoComponent } from './responsavel/consumo/consumo.component';
 import { RetornoBancoComponent } from './venda/retorno-banco/retorno-banco.component';
+import { HistoricoCreditoComponent } from './responsavel/historico-credito/historico-credito.component';
 
 const routes: Routes = [
   {path:'', component:LoginComponent},
@@ -57,7 +58,13 @@ const routes: Routes = [
     data: { expectedRole: ['ROLE_RESPONSAVEL']},
     component : ConsumoComponent, 
     canActivate : [RouteGuardService]
-  },  
+  },
+  {
+    path : 'responsavel/historicocredito/:id',
+    data: { expectedRole: ['ROLE_RESPONSAVEL']},
+    component : HistoricoCreditoComponent, 
+    canActivate : [RouteGuardService]
+  },   
   { 
     path : 'todos',
     data: { expectedRole: ['ROLE_ADMIN']}, 
