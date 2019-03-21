@@ -9,6 +9,8 @@ import { VendaService } from 'src/app/service/venda/venda.service';
 import { FormaPagamento } from '../forma-pagamento/formapgto.model';
 import { FormaPagamentoService } from 'src/app/service/util/forma-pagamento/formapgto.service';
 import { ItemVenda } from './item-venda.model';
+import { Saldo } from 'src/app/util/saldo/saldo.model';
+import { THIS_EXPR } from '@angular/compiler/src/output/output_ast';
 
 @Component({
   selector: 'app-venda-produto',
@@ -71,7 +73,7 @@ export class VendaProdutoComponent implements OnInit {
     this.usuarioService.getByMatricula(this.usuario.matricula).subscribe(data=> {       
       if (data != null) {
           this.usuario = data;          
-          if (data.saldo != null && data.saldo.lenght > 0) {
+          if (data.saldo != null && data.saldo.length > 0) {
             this.usuario.saldo.forEach(saldo => {
               if(saldo.status != "Pendente"){
                 this.saldo = this.saldo + saldo.credito;
@@ -130,6 +132,9 @@ export class VendaProdutoComponent implements OnInit {
                 item.quantidade = (this.quantidade);
                 item.valorItem = data.valor;
 
+                // ATUALIZA QUANTIDADE PRODUTO
+                item.produto.quantidade = item.produto.quantidade - this.quantidade;
+
                 this.totalCompra = this.totalCompra + (data.valor * this.quantidade);
                 this.itens.push(item);
                 this.limparCampos();
@@ -147,12 +152,21 @@ export class VendaProdutoComponent implements OnInit {
 
   finalizarVenda() {
     this.limparMensagem();
+    let hasSaldo = true;
     if(this.selectedFormaPgtoNome == "Carteirinha") {
       if(this.saldo < this.totalCompra) {
+        hasSaldo = false;
         this.mensagem = "Saldo insulficiente para realizar a compra!";
         return;
+      } else {
+        // ATUALIZA SALDO
+        let saldo = new Saldo();
+        saldo.status = "Creditado";
+        saldo.credito = -this.totalCompra;
+        this.usuario.saldo.push(saldo);
       }
-    } else {
+    } 
+    if(hasSaldo) {
       this.venda.itens = this.itens;
       this.venda.cliente = this.usuario;
       this.venda.funcionario = this.vendedor;
@@ -186,6 +200,7 @@ export class VendaProdutoComponent implements OnInit {
     this.hasUsuario = false;
     this.nomeAluno = '';
     this.saldo = 0;
+    this.totalCompra = 0;
     this.produto = new Produto();
     this.selectedFormaPgtoNome = '';
     this.selectedFormaPgto = new FormaPagamento();
@@ -194,7 +209,7 @@ export class VendaProdutoComponent implements OnInit {
 
   limparCampos(){
     this.venda = new Venda();        
-    this.saldo = 0;
+    //this.saldo = 0;
     this.produto = new Produto();
     this.limparMensagem();
   }
