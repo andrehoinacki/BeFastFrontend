@@ -1,4 +1,4 @@
-<H1>Compra de Crédito</H1>
+<H1>Venda de Crédito</H1>
 
 <div class="container">
   <div class="alert alert-warning" *ngIf="mensagem">{{mensagem}}</div>
@@ -28,7 +28,8 @@
       </fieldset>
       <fieldset class="form-group" style="float:right; width: 100%;" >
           <p>Campos marcados com (*) são obrigatórios!</p>
-          <button style="margin-right: 15px;" (click)="limpar()" class="btn btn-danger">Cancelar</button>
+          <button style="margin-right: 15px;" (click)="cancelar()" class="btn btn-danger">Cancelar</button>
+          <button style="margin-right: 15px;" (click)="limpar()" class="btn btn-warning">Limpar</button>
           <button type="submit" class="btn btn-success">Salvar</button>          
         </fieldset>
   </form>  

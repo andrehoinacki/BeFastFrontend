@@ -59,4 +59,8 @@ export class ListVendasComponent implements OnInit {
 
     return tmp;
   }
+
+  voltar(){
+    this.router.navigate(['welcome', ""])
+  }
 }

@@ -21,4 +21,5 @@
     <p>Saldo Total = R$ {{formatReal(total)}}</p>
     <p [hidden]="recebiveis.length > 0" class="no-results">Nenhum crédito encontrado</p>
     <paginator (pageChanged)="pageChanged($event)" [totalElements]="totalRecords" [pageSize]="pageSize" [actualPage]="actualPage"></paginator>
+    <button style="margin-right: 15px;" (click)="voltar()" class="btn btn-danger">Voltar</button>
 </div>

@@ -135,25 +135,23 @@ export class VendaProdutoComponent implements OnInit {
                       }
                     });
                   });
-              }
-              if(restrito) {
-                this.mensagem = 'O usuário ' + this.usuario.nome + " não pode consumir esse tipo de alimento";
-              } else {
-                let item = new ItemVenda();
-                item.produto = data;
-                item.quantidade = (this.quantidade);
-                item.valorItem = data.valor;
-
-                // ATUALIZA QUANTIDADE PRODUTO
-                item.produto.quantidade = item.produto.quantidade - this.quantidade;
-
-                this.totalCompra = this.totalCompra + (data.valor * this.quantidade);
-                this.itens.push(item);
-                this.limparCampos();
-              }
-              
+              }                   
             }
-          
+            if(restrito) {
+              this.mensagem = 'O usuário ' + this.usuario.nome + " não pode consumir esse tipo de alimento";
+            } else {
+              let item = new ItemVenda();
+              item.produto = data;
+              item.quantidade = (this.quantidade);
+              item.valorItem = data.valor;
+
+              // ATUALIZA QUANTIDADE PRODUTO
+              item.produto.quantidade = item.produto.quantidade - this.quantidade;
+
+              this.totalCompra = this.totalCompra + (data.valor * this.quantidade);
+              this.itens.push(item);
+              this.limparCampos();
+            }
           
         } else {
           this.mensagem = "Produto não encontrado!"
@@ -186,7 +184,8 @@ export class VendaProdutoComponent implements OnInit {
       this.venda.dataVenda = new Date();
       this.venda.pagamento = this.selectedFormaPgto;
       this.venda.total = this.totalCompra;
-      this.vendaService.salvar(this.venda).subscribe(data=>{      
+      this.vendaService.salvar(this.venda).subscribe(data=>{
+        this.mensagem = "Venda realizada com sucesso!";     
         this.cancelarVenda();
       });
     }
@@ -217,6 +216,12 @@ export class VendaProdutoComponent implements OnInit {
     this.produto = new Produto();
     this.selectedFormaPgtoNome = '';
     this.selectedFormaPgto = new FormaPagamento();
+
+    setTimeout(() => {
+      this.limparMensagem();
+    }, 500);
+    
+
   }
 
   limparCampos(){

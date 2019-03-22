@@ -92,8 +92,6 @@ export class CreditoComponent implements OnInit {
     if(!this.validarUsuario()){
       return;
     }
-    
-    alert("continuei");
 
     if(this.usuario.saldo.length == 0) {
       this.usuario.saldo = [];
@@ -164,5 +162,9 @@ export class CreditoComponent implements OnInit {
       }    
   
       return tmp;
+    }
+
+    cancelar(){
+      this.router.navigate(['welcome', ""])
     }
 }
