@@ -13,3 +13,7 @@
 .table td, .table th {
     vertical-align: baseline;
 }
+
+.ng-invalid:not(form) {
+    border-left: 5px solid red;
+}
