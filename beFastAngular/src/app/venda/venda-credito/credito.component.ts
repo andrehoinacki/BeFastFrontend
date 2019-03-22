@@ -1,6 +1,6 @@
 import { ActivatedRoute, Router } from '@angular/router';
 import { UsuarioService } from '../../service/admin/usuario/usuario.service';
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, ElementRef } from '@angular/core';
 import { Usuario } from '../../admin/usuario/usuario.model';
 import { FormaPagamento } from '../forma-pagamento/formapgto.model';
 import { FormaPagamentoService } from 'src/app/service/util/forma-pagamento/formapgto.service';
@@ -30,7 +30,8 @@ export class CreditoComponent implements OnInit {
     private usuarioService: UsuarioService,
     private formapgtoService: FormaPagamentoService,
     private route: ActivatedRoute,
-    private router: Router
+    private router: Router,
+    private el: ElementRef
   ) { }
 
   ngOnInit() {
@@ -38,8 +39,11 @@ export class CreditoComponent implements OnInit {
     this.saldo = new Saldo();
   }
 
-  loadFormasPgto(){
+  public ngAfterContentInit() {
+    this.setarFocu();
+  }
 
+  loadFormasPgto(){
     this.formapgtoService.list().subscribe(data=>{
       this.listFormaPgto=data;
       this.listFormaPgto.forEach(fpgto => {
@@ -59,22 +63,38 @@ export class CreditoComponent implements OnInit {
 
   getUsuario(){
     this.usuarioService.getByMatricula(this.matricula).subscribe(data=> {
-      this.usuario=data;
-      this.hasUsuario = true;
-      data.saldo.forEach(saldo => {
-        if(saldo.status != "Pendente"){
-          this.saldoAtual = this.saldoAtual + saldo.credito;
-        }
-      });
+      if(data != null) {
+        this.limparMensagem();
+        this.usuario=data;
+        this.hasUsuario = true;
+        data.saldo.forEach(saldo => {
+          if(saldo.status != "Pendente"){
+            this.saldoAtual = this.saldoAtual + saldo.credito;
+          }
+        });
+      } else {
+        this.mensagem = "Usuário não encontrado!";
+      }
+
+    },
+    erro=>{
+      this.limpar();
     });
     
   }
 
+  limparMensagem() {
+    this.mensagem = undefined;
+  }
+
   saveSaldo() {
-    if(this.selectedFormaPgto == null){
-      this.mensagem = "Selecione uma forma de pagamento";
-      return false;
+    this.limparMensagem();
+    if(!this.validarUsuario()){
+      return;
     }
+    
+    alert("continuei");
+
     if(this.usuario.saldo.length == 0) {
       this.usuario.saldo = [];
     }
@@ -84,10 +104,26 @@ export class CreditoComponent implements OnInit {
     this.usuario.saldo.push(this.saldo);
     this.usuarioService.salvar(this.usuario).subscribe(data=>{
     this.limpar();
-    this.mensagem = "Saldo atualizado com sucesso!";
-      //this.router.navigate(['/admin/usuario']);
+    this.mensagem = "Compra realizada com sucesso!";
     });
 
+  }
+
+  validarUsuario(): boolean {
+    this.limparMensagem();
+    if(this.usuario == null){
+      this.mensagem = "Selecione um usuário!";
+      return false;
+    }
+    if(this.saldo.credito == null || this.saldo.credito == 0){
+      this.mensagem = "Indique o valor da recarga!";
+      return false;
+    }
+    if(this.selectedFormaPgto == null){
+      this.mensagem = "Selecione uma forma de pagamento!";
+      return false;
+    }
+    return true;
   }
   
   limpar() {
@@ -97,14 +133,21 @@ export class CreditoComponent implements OnInit {
     this.hasUsuario = false;
     this.selectedFormaPgto = null;
     this.selectedFormaPgtoNome = null;
-    this.mensagem = "";
     this.saldoAtual = 0;
+    this.limparMensagem();
+    this.setarFocu();
   }
 
     // Radio Change Event
     onItemChange(item){
       this.selectedFormaPgto = item;
       this.selectedFormaPgtoNome = item.nome;
+    }
+
+    setarFocu() {
+      setTimeout(() => {
+        this.el.nativeElement.focus();
+      }, 500);
     }
 
     formatReal( int ) {

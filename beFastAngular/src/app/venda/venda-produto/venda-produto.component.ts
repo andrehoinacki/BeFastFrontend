@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, ElementRef } from '@angular/core';
 import { Venda } from './venda.model';
 import { Produto } from 'src/app/admin/produto/produto.model';
 import { Usuario } from 'src/app/admin/usuario/usuario.model';
@@ -44,6 +44,7 @@ export class VendaProdutoComponent implements OnInit {
     private produtoService : ProdutoService,
     private vendaService: VendaService,
     private formapgtoService: FormaPagamentoService,
+    private el: ElementRef
   ) { }
 
   ngOnInit() {
@@ -52,6 +53,11 @@ export class VendaProdutoComponent implements OnInit {
     this.usuario = new Usuario();
     this.getVendedor();
     this.loadFormasPgto();
+  }
+  public ngAfterContentInit() {
+    setTimeout(() => {
+        this.el.nativeElement.focus();
+    }, 500);
   }
 
   loadFormasPgto(){
@@ -211,12 +217,10 @@ export class VendaProdutoComponent implements OnInit {
     this.produto = new Produto();
     this.selectedFormaPgtoNome = '';
     this.selectedFormaPgto = new FormaPagamento();
-    this.listFormaPgto = [];
   }
 
   limparCampos(){
-    this.venda = new Venda();        
-    //this.saldo = 0;
+    this.venda = new Venda();
     this.produto = new Produto();
     this.limparMensagem();
   }

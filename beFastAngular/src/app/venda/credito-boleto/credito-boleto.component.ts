@@ -1,7 +1,7 @@
 import { Component, OnInit, ViewChild } from '@angular/core';
 import {saveAs} from 'file-saver';
 import { FileService } from '../file.service';
-import { ActivatedRoute } from '@angular/router';
+import { ActivatedRoute, Router } from '@angular/router';
 import { Usuario } from 'src/app/admin/usuario/usuario.model';
 import { UsuarioService } from 'src/app/service/admin/usuario/usuario.service';
 
@@ -24,10 +24,12 @@ export class CreditoBoletoComponent implements OnInit {
   valorCredito : number;
   id:number;
   usuario: Usuario;
+  mensagem : string;
   
   constructor(
     private service:FileService,
     private route: ActivatedRoute,
+    private router: Router,
     private usuarioService: UsuarioService,
   ) { }
      
@@ -42,11 +44,19 @@ export class CreditoBoletoComponent implements OnInit {
     });   
   }
 
-  downloadFile() {        
+  downloadFile() {
+    this.limparMensagem();
+    if(this.valorCredito == null || this.valorCredito == 0)  {
+      this.mensagem = "Insira o valor da recarga!"
+    }      
     this.service.download(this.matricula, this.valorCredito)
     .subscribe(data => {            
       saveAs(new Blob([data], {type: 'application/pdf'}), 'boleto_download.pdf');
     })
+  }
+
+  limparMensagem() {
+    this.mensagem = undefined;
   }
 
   get(){
@@ -56,6 +66,10 @@ export class CreditoBoletoComponent implements OnInit {
       this.matricula = data.matricula;
       this.nomeAluno = data.nome;      
     });    
+  }
+
+  cancelarVenda() {
+    this.router.navigate(['responsavel', ""]);
   }
  
 }

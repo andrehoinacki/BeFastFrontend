@@ -1,0 +1,15 @@
+.table thead th {
+    vertical-align: baseline;
+}
+
+.h1, h1 {
+    text-align: -webkit-center;
+}
+
+.table {
+     margin-top: 20px;
+}
+
+.table td, .table th {
+    vertical-align: baseline;
+}

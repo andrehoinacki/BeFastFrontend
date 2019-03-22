@@ -1,4 +1,4 @@
-<h1> Venda de Crédito</h1>
+<h1> Comprar Crédito</h1>
 
 <div class="alert alert-warning" *ngIf="mensagem">{{mensagem}}</div>
 
@@ -18,12 +18,12 @@
       <label>Valor:*</label>
     </div>
     <div class="col-md-4">
-      <input type="number" #codigo="ngModel" [(ngModel)]="valorCredito" class="form-control" name="codigo" required="required">
+      <input type="number" #codigo="ngModel" [(ngModel)]="valorCredito" min="0" class="form-control" name="valorCredito" required="required" autofocus>
     </div>
   </div>
   <div class="row" style="margin-top: 50px;">
-    <button style="margin-right: 15px;" (click)="cancelarVenda()" class="btn btn-danger">Cancelar Venda</button>
-    <button (click)="downloadFile()" class="btn btn-success">Finalizar Venda</button>
+    <button style="margin-right: 15px;" (click)="cancelarVenda()" class="btn btn-danger">Cancelar</button>
+    <button (click)="downloadFile()" class="btn btn-success">Finalizar</button>
   </div>
 
 </div>

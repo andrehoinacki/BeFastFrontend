@@ -12,6 +12,7 @@
 
 .table td, .table th {
     vertical-align: baseline;
+    padding: 2px;
 }
 
 .itens {

@@ -2,7 +2,7 @@ import { ActivatedRoute, Router } from '@angular/router';
 import { ProdutoService } from '../../service/admin/produto/produto.service';
 import { RestricaoService } from '../../service/admin/restricao/restricao.service';
 import { CategoriaService } from '../../service/admin/categoria/categoria.service';
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, ElementRef } from '@angular/core';
 import { Produto } from '../produto/produto.model';
 import { Categoria } from '../categoria/categoria.model';
 
@@ -15,7 +15,7 @@ import { Categoria } from '../categoria/categoria.model';
 export class ProdutoComponent implements OnInit {
   
   id:number;
-  message: string;
+  mensagem: string;
   produto: Produto;
   selectedRestricao : Array<any>;
   selectedCategoria : Categoria;
@@ -31,7 +31,8 @@ export class ProdutoComponent implements OnInit {
     private route: ActivatedRoute,
     private router: Router, 
     private restricaoService : RestricaoService, 
-    private categoriaService : CategoriaService
+    private categoriaService : CategoriaService,
+    private el: ElementRef
   ) { }
 
   ngOnInit() {
@@ -50,6 +51,12 @@ export class ProdutoComponent implements OnInit {
         this.get();
       }
     });
+  }
+
+  public ngAfterContentInit() {
+    setTimeout(() => {
+        this.el.nativeElement.focus();
+    }, 500);
   }
 
   loadRestricoes(){
@@ -85,12 +92,46 @@ export class ProdutoComponent implements OnInit {
   }
   
   saveProduto() {
+    this.limparMensagem();
+    if(!this.validaProduto()) {
+      return;
+    }
     this.produto.restricoes = this.selectedRestricao;
     this.produto.categoria = this.selectedCategoria;
     this.produtoService.salvar(this.produto).subscribe(data=>{
-      this.message = "Produto salvo com sucesso!";
+      this.mensagem = "Produto salvo com sucesso!";
       this.router.navigate(['/admin/produto']);
     });
+  }
+  validaProduto(): boolean {
+    this.limparMensagem();
+    if(this.produto.codigo == null){
+      this.mensagem = "O Código é obrigatório!";
+      return false;
+    }
+    if(this.produto.descricao == null){
+      this.mensagem = "A descrição é obrigatória!";
+      return false;
+    }
+    if(this.produto.quantidade == null || this.produto.quantidade == 0){
+      this.mensagem = "A quantidade é obrigatória e deve ser maior que zero!";
+      return false;
+    }
+
+    if(this.produto.valor == null || this.produto.valor == 0){
+      this.mensagem = "O valor é obrigatório e deve ser maior que zero!";
+      return false;
+    }
+
+    if(this.produto.valorCalorico == null || this.produto.valorCalorico == 0){
+      this.mensagem = "O valor calórico é obrigatório e deve ser maior que zero!";
+      return false;
+    }
+    return true;
+  }
+
+  limparMensagem() {
+    this.mensagem = undefined;
   }
 
   // Checkbox Change Event

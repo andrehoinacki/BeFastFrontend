@@ -10,7 +10,7 @@
       </div>
       <div class="col-md-4">
         <input type="text" #nome="ngModel" [(ngModel)]="usuario.matricula" class="form-control" name="nome"
-          required="required">
+          required="required" autofocus>
       </div>
       <div class="col-md-2" *ngIf="hasUsuario">
           <label>Usuário: {{nomeAluno}}</label>

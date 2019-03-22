@@ -1,7 +1,6 @@
 <H1>Compra de Crédito</H1>
 
 <div class="container">
-  <div class="alert alert-warning" *ngIf="creditoForm.dirty && creditoForm.invalid">Entre com valores válidos</div>
   <div class="alert alert-warning" *ngIf="mensagem">{{mensagem}}</div>
   
   <form (ngSubmit)="!creditoForm.invalid && saveSaldo()" #creditoForm="ngForm">
@@ -9,7 +8,7 @@
       <label>Matricula:*</label>
       <input type="text" 
             [(ngModel)]="matricula" class="form-control" 
-                name="matricula" required="required" (focusout)="getUsuario()">
+                name="matricula" required="required" (focusout)="getUsuario()" autofocus>
     </fieldset>
     <fieldset class="form-group" style="float:left; width: 40%; margin-right: 45px;">
       <label>Valor:*</label>

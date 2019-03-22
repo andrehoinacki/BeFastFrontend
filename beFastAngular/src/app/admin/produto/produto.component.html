@@ -1,7 +1,7 @@
 <H1>Cadastro de Produto</H1>
 
 <div class="container">
-  <div class="alert alert-warning" *ngIf="produtoForm.dirty && produtoForm.invalid">Enter valid values</div>
+  <div class="alert alert-warning" *ngIf="mensagem">{{mensagem}}</div>
   
   <form (ngSubmit)="!produtoForm.invalid && saveProduto()" #produtoForm="ngForm">
     <div class="row">
@@ -9,7 +9,7 @@
         <label>Código:* </label>
         <input type="text" #nome="ngModel" 
               [(ngModel)]="produto.codigo" class="form-control" 
-                  name="codigo" required="required" >
+                  name="codigo" required="required" autofocus>
       </fieldset>
       <fieldset class="col-md-6">
         <label>Descricao:* </label>
@@ -29,7 +29,7 @@
         <label>Valor:* </label>
         <input type="number" #username="ngModel" 
               [(ngModel)]="produto.valor" class="form-control" 
-                  name="valor" required="required">
+                  name="valor" required="required" min="0">
       </fieldset>
       <fieldset class="col-md-4">
           <label>Valor Calórico:* </label>
