@@ -23,6 +23,8 @@ import { UpdateRestricaoComponent } from './responsavel/update-restricao/update-
 import { ConsumoComponent } from './responsavel/consumo/consumo.component';
 import { RetornoBancoComponent } from './venda/retorno-banco/retorno-banco.component';
 import { HistoricoCreditoComponent } from './responsavel/historico-credito/historico-credito.component';
+import { ListFilialComponent } from './admin/list-filial/list-filial.component';
+import { FilialComponent } from './admin/filial/filial.component';
 
 const routes: Routes = [
   {path:'', component:LoginComponent},
@@ -141,6 +143,20 @@ const routes: Routes = [
     canActivate : [RouteGuardService] 
   },
   
+  { 
+    path : 'admin/filial',
+    data: { expectedRole: ['ROLE_ADMIN', 'ROLE_FUNCIONARIO']}, 
+    component : ListFilialComponent, 
+    canActivate : [RouteGuardService] 
+  },
+
+  { 
+    path : 'admin/filial/:id',
+    data: { expectedRole: ['ROLE_ADMIN', 'ROLE_FUNCIONARIO']}, 
+    component : FilialComponent, 
+    canActivate : [RouteGuardService] 
+  },
+
 
   
   {path:'logout', component:LogoutComponent, canActivate : [RouteGuardService]},

@@ -31,6 +31,8 @@ import { UpdateRestricaoComponent } from './responsavel/update-restricao/update-
 import { ConsumoComponent } from './responsavel/consumo/consumo.component';
 import { RetornoBancoComponent } from './venda/retorno-banco/retorno-banco.component';
 import { HistoricoCreditoComponent } from './responsavel/historico-credito/historico-credito.component';
+import { ListFilialComponent } from './admin/list-filial/list-filial.component';
+import { FilialComponent } from './admin/filial/filial.component';
 
 
 @NgModule({
@@ -60,7 +62,9 @@ import { HistoricoCreditoComponent } from './responsavel/historico-credito/histo
     UpdateRestricaoComponent,
     ConsumoComponent,
     RetornoBancoComponent,
-    HistoricoCreditoComponent      
+    HistoricoCreditoComponent,
+    ListFilialComponent,
+    FilialComponent      
   ],
   imports: [
     BrowserModule,

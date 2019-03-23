@@ -1,0 +1,71 @@
+<H1>Cadastro de Usuário</H1>
+
+<div class="container">
+  <div class="alert alert-warning" *ngIf="filialForm.dirty && filialForm.invalid">Enter valid values</div>
+
+  <form (ngSubmit)="!filialForm.invalid && saveFilial()" #filialForm="ngForm">
+    <div class="row">
+      <fieldset class="col-md-6">
+        <label>Razão Social:*</label>
+        <input type="text" #nome="ngModel" [(ngModel)]="filial.razaoSocial" class="form-control" name="razao"
+          required="required" autofocus>
+      </fieldset>
+      <fieldset class="col-md-6">
+        <label>Nome Fantasia: </label>
+        <input type="text" #fantasia="ngModel" [(ngModel)]="filial.nomeFantasia" class="form-control" name="fantasia">
+      </fieldset>
+    </div>
+    <div class="row">
+      <fieldset class="col-md-6">
+        <label>CNPJ:*</label>
+        <input type="text" #cnpj="ngModel" [(ngModel)]="filial.cnpj" class="form-control" name="cnpj"
+          required="required">
+      </fieldset>
+      <fieldset class="col-md-6">
+        <label>Incrição Estadual:*</label>
+        <input type="text" #inscricao="ngModel" [(ngModel)]="filial.inscricaoEstadual" class="form-control" name="inscricao"
+          required="required">
+      </fieldset>
+    </div>
+
+    <div class="row">
+      <fieldset class="col-md-6">
+        <label>Logradouro:*</label>
+        <input type="text" #nome="ngModel" [(ngModel)]="selectedEndereco.logradouro" class="form-control" name="razao"
+          required="required" autofocus>
+      </fieldset>
+      <fieldset class="col-md-6">
+        <label>Numero: </label>
+        <input type="text" #fantasia="ngModel" [(ngModel)]="selectedEndereco.numero" class="form-control" name="fantasia">
+      </fieldset>
+    </div>
+    <div class="row">
+      <fieldset class="col-md-4">
+        <label>CEP:*</label>
+        <input type="text" #cep="ngModel" [(ngModel)]="selectedEndereco.cep" class="form-control" name="cep"
+          required="required">
+      </fieldset>
+      <fieldset class="col-md-4">
+        <label>Bairro:*</label>
+        <input type="text" #bairro="ngModel" [(ngModel)]="selectedEndereco.bairro" class="form-control" name="bairro"
+          required="required">
+      </fieldset>
+      <fieldset class="col-md-4">
+        <label>Estado:*</label>
+        <input type="text" #estado="ngModel" [(ngModel)]="selectedEndereco.estado" class="form-control" name="estado"
+          required="required">
+      </fieldset>
+    </div>
+
+    
+    <div class="row" style="margin-top: 40px;">
+      <div class="col-md-12">
+        <p>Campos marcados com (*) são obrigatórios!</p>
+      </div>
+      <div class="col-md-12">
+        <button style="margin-right: 15px;" (click)="cancelar()" class="btn btn-danger">Cancelar</button>
+        <button type="submit" class="btn btn-success">Salvar</button>
+      </div>
+    </div>
+  </form>
+</div>

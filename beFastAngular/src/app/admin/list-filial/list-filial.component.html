@@ -1,0 +1,37 @@
+<h1> Listar Usuário </h1>
+
+<div class="alert alert-success" *ngIf='message'>{{message}}</div>
+
+<div class="container">
+
+    <table class="table table-striped" [hidden]="filiais.length == 0">
+      <thead>
+        <tr>
+          <th scope="col">Razão Social</th>
+          <th scope="col">Nome Fantasia</th>
+          <th scope="col">CNPJ</th>
+          <th scope="col">Inscrição Estadual</th>
+          <th></th>
+          <th></th>
+        </tr>
+      </thead>
+      <tbody>
+        <!--linha da tabela com as infos -->
+        <tr *ngFor="let row of filiais">
+          <td>{{row.razaoSocial}}</td>
+          <td>{{row.nomeFantasia}}</td>
+          <td>{{row.cnpj}}</td>          
+          <td>{{row.inscricaoEstadual}}</td>          
+          <td><button (click)="updateFilial(row.id)" class="btn btn-success">Update</button></td>
+          <td><button (click)="deleteFilial(row.id)" class="btn btn-warning">Delete</button></td>          
+        </tr>
+      </tbody>
+    </table>
+    <p [hidden]="filiais.length > 0" class="no-results">Nenhuma filial encontrada</p>
+    <paginator (pageChanged)="pageChanged($event)" [totalElements]="totalRecords" [pageSize]="pageSize" [actualPage]="actualPage"></paginator>
+  
+    <div class="row">
+      <button (click)="novo()" class="btn btn-success">Novo</button>
+  </div>
+
+</div>
